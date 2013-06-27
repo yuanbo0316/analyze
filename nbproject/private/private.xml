@@ -1,27 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
-    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/1">
-        <file>file:/H:/Workspaces/new-netbean/analyze/insert_sql/service.sql</file>
-        <file>file:/H:/Workspaces/new-netbean/analyze/web/WEB-INF/sql/analyze.properties</file>
-        <file>file:/H:/Workspaces/new-netbean/analyze/src/java/com/soa/service/busi/analyze/SaveFlashSql.java</file>
-        <file>file:/H:/Workspaces/new-netbean/analyze/src/java/com/soa/service/busi/analyze/SaveFlashService.java</file>
-        <file>file:/H:/Workspaces/new-netbean/analyze/src/java/com/soa/util/NodeUtil.java</file>
-        <file>file:/H:/Workspaces/new-netbean/analyze/src/java/com/soa/plugin/RequestAnalyze.java</file>
-        <file>file:/H:/Workspaces/new-netbean/analyze/src/java/com/soa/service/busi/analyze/SaveRequest.java</file>
-        <file>file:/H:/Workspaces/new-netbean/analyze/src/java/com/soa/service/busi/analyze/SaveLoginService.java</file>
-        <file>file:/H:/Workspaces/new-netbean/analyze/web/WEB-INF/server.xml</file>
-        <file>file:/H:/Workspaces/new-netbean/analyze/src/java/com/soa/service/busi/analyze/SaveErrJson.java</file>
-        <file>file:/H:/Workspaces/new-netbean/analyze/src/java/com/soa/plugin/WarnLogAnalyze.java</file>
-        <file>file:/H:/Workspaces/new-netbean/analyze/src/java/com/soa/util/SystemUtil.java</file>
-        <file>file:/H:/Workspaces/new-netbean/analyze/src/java/com/soa/plugin/LoginAnalyze.java</file>
-        <file>file:/H:/Workspaces/new-netbean/analyze/src/java/com/soa/service/busi/archive/SqlWarnTask.java</file>
-        <file>file:/H:/Workspaces/new-netbean/analyze/web/WEB-INF/sql/archive.properties</file>
-        <file>file:/H:/Workspaces/new-netbean/analyze/src/java/com/soa/service/busi/archive/SqlArchiveTask.java</file>
-        <file>file:/H:/Workspaces/new-netbean/analyze/web/WEB-INF/timer.xml</file>
-        <file>file:/H:/Workspaces/new-netbean/analyze/src/java/com/soa/service/busi/archive/ServiceRunTask.java</file>
-        <file>file:/H:/Workspaces/new-netbean/analyze/src/java/com/soa/service/busi/archive/ServiceArchiveTask.java</file>
-        <file>file:/H:/Workspaces/new-netbean/analyze/web/WEB-INF/applicationContext.xml</file>
-        <file>file:/H:/Workspaces/new-netbean/analyze/web/META-INF/context.xml</file>
-    </open-files>
 </project-private>
