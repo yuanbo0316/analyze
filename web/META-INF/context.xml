@@ -11,10 +11,10 @@
     driverClassName="com.mysql.jdbc.Driver"
     url="jdbc:mysql://192.168.1.108:3306/analyze?useUnicode=true&amp;characterEncoding=UTF-8"/>
 
-    <Valve className="com.radiadesign.catalina.session.RedisSessionHandlerValve" />
+<!--    <Valve className="com.radiadesign.catalina.session.RedisSessionHandlerValve" />
     <Manager className="com.radiadesign.catalina.session.RedisSessionManager"
              host="127.0.0.1"
              port="6379"
              database="0"
-             maxInactiveInterval="60" />
+             maxInactiveInterval="60" />-->
 </Context>
