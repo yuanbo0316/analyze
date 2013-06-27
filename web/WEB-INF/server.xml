@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+
+
+<root>
+    <server>
+        <name>jtaqxh</name>
+        <sql_dir>H:\\Workspaces\\svn\\trunk\\ipt\\jtaqxh\\build\\web\\WEB-INF\\sql\\</sql_dir>
+        <analyze>sqlRunAnalyze</analyze>
+        <analyze>serviceRunAnalyze</analyze>
+        <analyze>loginAnalyze</analyze>
+        <analyze>requestAnalyze</analyze>
+        <analyze>warnLogAnalyze</analyze>
+    </server>
+    <server>
+        <name>jtgzfw</name>
+        <sql_dir>H:\\Workspaces\\svn\\trunk\\ipt\\jtgzfw\\build\\web\\WEB-INF\\sql\\</sql_dir>
+        <analyze>sqlRunAnalyze</analyze>
+        <analyze>serviceRunAnalyze</analyze>
+        <analyze>loginAnalyze</analyze>
+        <analyze>requestAnalyze</analyze>
+        <analyze>warnLogAnalyze</analyze>
+    </server>
+</root>
