@@ -9,8 +9,8 @@ import com.soa.service.BaseService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-/**
- *
+/**P33002
+ * 保存定时服务
  * @author chen
  */
 @Service
@@ -25,6 +25,5 @@ public class SaveTaskService extends BaseService{
     @Transactional
     public void execute(AbstractCommonData in, AbstractCommonData inHead, AbstractCommonData out, AbstractCommonData outHead) {
        update("save_task_run", in);
-    }
-    
+    }    
 }

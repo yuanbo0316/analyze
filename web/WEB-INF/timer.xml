@@ -43,7 +43,7 @@
         <service-code>P32004</service-code>
     </timer>
     <timer desc="定时清理Task">
-         <run-time>18:16</run-time>        
+         <run-time>15:16</run-time>        
         <service-code>P33003</service-code>
     </timer>
 </root>

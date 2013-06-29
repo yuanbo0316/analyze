@@ -10,8 +10,8 @@ import java.util.Date;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-/**
- *
+/**P31005
+ * 保存用户登录记录
  * @author chen
  */
 @Service

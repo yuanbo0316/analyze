@@ -13,8 +13,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-/**
- *
+/**P33003
+ * 定时清理Task日志
  * @author chen
  */
 @Service
@@ -29,7 +29,6 @@ public class DropTaskLog extends BaseService {
     @Override
     @Transactional
     public void execute(AbstractCommonData in, AbstractCommonData inHead, AbstractCommonData out, AbstractCommonData outHead) {
-       log.debug("++++++++++++++++");
        Date date = new Date();
        date = DateUtil.setHour(date, 0);
        date = DateUtil.setMinute(date, 0);
