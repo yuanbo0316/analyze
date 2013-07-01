@@ -42,4 +42,34 @@
         <run-time>03:31</run-time>
         <service-code>P32004</service-code>
     </timer>
+
+    <!-- request -->
+    <timer desc="url请求数据归档">
+        <run-time>03:32</run-time>
+        <service-code>P32005</service-code>
+    </timer>
+
+    <!-- warn -->
+    <timer desc="WARN日志定时删除">
+        <run-time>03:35</run-time>
+        <service-code>P32006</service-code>
+    </timer>
+
+    <!-- st error -->
+    <timer desc="删除系统异常日志">
+        <run-time>03:36</run-time>
+        <service-code>P32007</service-code>
+    </timer>
+
+    <!-- error -->
+    <timer desc="error级别日志定时删除">
+        <run-time>03:37</run-time>
+        <service-code>P32008</service-code>
+    </timer>
+
+    <!-- user -->
+    <timer desc="用户登录信息归档">
+        <run-time>03:38</run-time>
+        <service-code>P32009</service-code>
+    </timer>
 </root>
