@@ -25,11 +25,11 @@ public class TaskAnalyze implements AnalyzePlugin {
 
     @Override
     public void analyze(AbstractCommonData json, ILoggingEvent event, String logMark, String server) {
-        log.debug("====================={}",logMark);
         if(!TASK_MARK.equals(logMark) || json==null){
             return;
         }
-        
+        log.debug("====================={}",logMark);
+
         AbstractCommonData in = DataConvertFactory.getInstance();
         in.putAll(json);
         in.putDateValue("save_time", new Date());
