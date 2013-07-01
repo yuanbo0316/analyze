@@ -73,16 +73,16 @@ public class SystemController {
         AbstractCommonData pageData = (AbstractCommonData) request.getAttribute("page_data");
         AbstractCommonData session = BaseService.getSession(pageData);      //session
         Set<String> limitSet = (Set<String>) session.getObjectValue("limit");       //权限
-        if (log.isDebugEnabled()) {
-            log.debug("拥有的权限：" + limitSet);
-        }
-        String[] pageArr = pageName.split("/");
-        if (limitSet == null || limitSet.isEmpty()) {
-            throw new GlobalException(200023);      //请先登录
-        }
-        if (pageArr[pageArr.length - 1].length() == 6 && !limitSet.contains(pageArr[pageArr.length - 1])) {
-            throw new GlobalException(200007);      //权限不足
-        }
+//        if (log.isDebugEnabled()) {
+//            log.debug("拥有的权限：" + limitSet);
+//        }
+//        String[] pageArr = pageName.split("/");
+//        if (limitSet == null || limitSet.isEmpty()) {
+//            throw new GlobalException(200023);      //请先登录
+//        }
+//        if (pageArr[pageArr.length - 1].length() == 6 && !limitSet.contains(pageArr[pageArr.length - 1])) {
+//            throw new GlobalException(200007);      //权限不足
+//        }
         String services = SystemUtil.pageServiceProperties.getProperty(pageName);
         if (log.isInfoEnabled()) {
             log.info("页面需要执行的服务：" + services);
