@@ -8,20 +8,24 @@ and open the template in the editor.
 <root>
     <server>
         <name>jtaqxh</name>
-        <sql_dir>H:\\Workspaces\\svn\\trunk\\ipt\\jtaqxh\\build\\web\\WEB-INF\\sql\\</sql_dir>
+        <sql_dir>C:\\Users\\chen\\Documents\\GitHub\\analyze\\web\\WEB-INF\\sql</sql_dir>
         <analyze>sqlRunAnalyze</analyze>
         <analyze>serviceRunAnalyze</analyze>
         <analyze>loginAnalyze</analyze>
         <analyze>requestAnalyze</analyze>
         <analyze>warnLogAnalyze</analyze>
+        <analyze>logStratAnalyze</analyze>
+        <analyze>taskAnalyze</analyze>
     </server>
     <server>
         <name>jtgzfw</name>
-        <sql_dir>H:\\Workspaces\\svn\\trunk\\ipt\\jtgzfw\\build\\web\\WEB-INF\\sql\\</sql_dir>
+        <sql_dir>C:\\Users\\chen\\Documents\\GitHub\\analyze\\web\\WEB-INF\\sql</sql_dir>
         <analyze>sqlRunAnalyze</analyze>
         <analyze>serviceRunAnalyze</analyze>
         <analyze>loginAnalyze</analyze>
         <analyze>requestAnalyze</analyze>
         <analyze>warnLogAnalyze</analyze>
+        <analyze>logStratAnalyze</analyze>
+        <analyze>taskAnalyze</analyze>
     </server>
 </root>

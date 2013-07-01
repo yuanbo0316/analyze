@@ -5,13 +5,6 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="GBK"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=GBK">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <h1>Hello World!</h1>
-    </body>
-</html>
+<%
+response.sendRedirect("index.do");
+%>

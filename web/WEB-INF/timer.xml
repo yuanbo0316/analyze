@@ -71,5 +71,9 @@
     <timer desc="用户登录信息归档">
         <run-time>03:38</run-time>
         <service-code>P32009</service-code>
+        
+    <timer desc="定时清理Task">
+        <run-time>04:00</run-time>        
+        <service-code>P33003</service-code>
     </timer>
 </root>

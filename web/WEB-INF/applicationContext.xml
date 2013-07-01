@@ -32,11 +32,7 @@
 
     <bean id="jmsFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
         <property name="brokerURL">
-<<<<<<< HEAD
             <value>tcp://192.168.1.108:61616</value>
-=======
-            <value>tcp://localhost:61616</value>
->>>>>>> origin/lzt-analyze_and_archive
         </property>
     </bean>
 
