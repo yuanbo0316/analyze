@@ -6,11 +6,13 @@ var page = $.pdialog.getCurrent();
 
 $("#login", page).click(function() {
     if ($("#login_form", page).valid()) {
-        var o = new AjaxOptions($("#login_form", page), true);
+        var o = new AjaxOptions($("#login_form", page));
+        o.isDialog = true;      //为弹出窗口
         o.put("service_code", "S34001");
         o.sus = function() {
             alertMsg.correct("登录成功！");
             $.pdialog.closeCurrent();
+            navTab.reload();      //登录成功后刷新当前navTab
         };
         $.ajax(o);
     }

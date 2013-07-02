@@ -5,7 +5,10 @@
 package com.soa.service.busi.user;
 
 import com.lianzt.commondata.AbstractCommonData;
+import com.lianzt.util.DateUtil;
 import com.soa.service.BaseService;
+import java.util.Date;
+import java.util.List;
 import org.springframework.stereotype.Service;
 
 /**
@@ -16,6 +19,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class RegJtgzfwUser extends BaseService {
 
+    private final String REG_SERVICE = "P23001";        //注册服务
+    private final String REG_SERVER = "jtgzfw";        //
+
     @Override
     public String[] keys() {
         return null;
@@ -23,5 +29,12 @@ public class RegJtgzfwUser extends BaseService {
 
     @Override
     public void execute(AbstractCommonData in, AbstractCommonData inHead, AbstractCommonData out, AbstractCommonData outHead) {
+        Date time = new Date();
+        time = DateUtil.setHour(time, 0);
+        time = DateUtil.setMinute(time, 0);
+        time = DateUtil.setSecond(time, 0);
+        time = DateUtil.addDay(time, -31);
+        List<AbstractCommonData> regTable = queryList("get_reg_jtgzfw_user", new Object[]{REG_SERVICE, REG_SERVER, time});
+        out.putArrayValue("reg_table", regTable);
     }
 }

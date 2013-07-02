@@ -167,7 +167,7 @@ function getNowDate() {
  * @param formId 表单的提交与回填范围，可以是page也可以具体的form，一般使用page。
  * @param {boolean} isDialog 是否为dialog
  */
-AjaxOptions = function(formId, isDialog) {
+AjaxOptions = function(formId) {
     /**
      * 在执行ajax请求过程中是否出现提示<br />类型：boolean
      */
@@ -183,17 +183,14 @@ AjaxOptions = function(formId, isDialog) {
      * 设置为true时，ajax期间所有表单项全为disabled状态。
      */
     this.noInput = true;
-
-    this.isDialog = isDialog;
+    /**
+     * 是否为弹出窗口
+     */
+    this.isDialog = false;
     /**
      * 要提交的表单
      */
-    if (isDialog) {
-        this.form = $(formId, $.pdialog.getCurrent());                        // 获取当前dialog中的xxxId
-    } else {
-        this.form = $(formId, navTab.getCurrentPanel());                      // 获取当前navTab中的xxxId
-    }
-
+    this.form = formId;
     /**
      * (默认：true， dataType为script和jsonp时默认为false) 设置为false将不缓存此页面
      * 类型 Boolean
@@ -218,13 +215,6 @@ AjaxOptions = function(formId, isDialog) {
      * 类型： Object
      */
     this.data = "";
-    if (this.form.length) {//判断表单是否为空
-        this.data = this.form.serialize();
-        if (!$.trim(this.data)) {
-            this.data = this.form.find("form").serialize();
-        }
-    }
-
 
     /**
      * 默认的成功回调函数
@@ -242,10 +232,10 @@ AjaxOptions = function(formId, isDialog) {
             //异常处理
             console.debug("异常代码=" + returnData.head.response_code + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 描述=" + returnData.head.response_desc);
             alertMsg.error(returnData.head.response_desc);
-            if(returnData.head.response_code == "200023"){
+            if (returnData.head.response_code == "200023") {
                 //登录
                 DWZ.loadLogin();
-            }else if ($.isFunction(this.fal)) {
+            } else if ($.isFunction(this.fal)) {
                 console.debug("执行异常，开始运行！");
                 this.fal(returnData.head.response_code, returnData.head.response_desc);
                 return;
@@ -288,6 +278,17 @@ AjaxOptions = function(formId, isDialog) {
      * 类型： function(XMLHttpRequest)
      */
     this.beforeSend = function(XMLHttpRequest) {
+        if (this.isDialog) {
+            this.form = $(this.form, $.pdialog.getCurrent());                        // 获取当前dialog中的xxxId
+        } else {
+            this.form = $(this.form, navTab.getCurrentPanel());                      // 获取当前navTab中的xxxId
+        }
+        if (this.form.length) {//判断表单是否为空
+            this.data = this.form.serialize() + '&' + this.data;
+            if (!$.trim(this.data)) {
+                this.data = this.form.find("form").serialize() + '&' + this.data;
+            }
+        }
         this.data = this.data + "&_type=ajax";
         var nowTime = getNowTime();
         console.debug("url:\t" + this.url + "\ndata:\t" + this.data.replace(/&/g, "\n\t") + "\ntype:\t" + this.type + "\ntime:\t" + nowTime);
@@ -639,53 +640,52 @@ function padBackTable(tableData, tableId, isDialog) {
             tableObj = $(tableId, navTab.getCurrentPanel());                      // 获取当前navTab中的xxxId
         }
         if (!tableObj.length) {
-            console.warn(tableId + " 不存在");
+            console.warn("表格 " + tableId + " 不存在！");
             return;
         }
-        if (tableObj.attr("id")) {
-            if (tableObj.find("thead").length == 0) {     //如果没有thead标签，创建一个
-                console.warn("表格 " + tableId + " 没有 thead 标签");
-                return;
-            }
-            thead = tableObj.find("thead");
-            if (tableObj.find("tbody").length == 0) {     //如果没有tbody标签，创建一个
-                console.warn("表格 " + tableId + " 没有 thead 标签");
-                tableObj.append($("<tbody/>"));
-            }
-            tbody = tableObj.find("tbody");
-            tableLength = 0;
-            keyList = new Array();
-            thead.find("tr th").each(function(i) {
-                tableLength++;
-                keyList[i] = $(this).attr("data-key");
-                if (!keyList[i]) {
-                    keyList[i] = "";
-                }
-            });
-
-            tbody.empty();
-            tableObj.data("_content", tableData);
-            var tr, td, rowData;
-            for (var index in tableData) {
-                tr = $("<tr/>").attr("row", index);
-                rowData = tableData[index];
-                if (typeof(rowData) == "object") {
-                    for (var k = 0; k < keyList.length; k++) {
-                        td = $("<td/>").attr("col", k);
-                        if (keyList[k]) {
-                            td.html(rowData[keyList[k]]);
-                        } else {
-                            td.html("&nbsp;");
-                        }
-                        tr.append(td);
-                    }
-                }
-                tbody.append(tr);
-            }
-            tableObj.removeClass("tablelist").addClass("tablelist");
-        } else {
-            console.error("表格不存在！");
+        if (tableObj.get(0).tagName.toLocaleLowerCase() != "table") {
+            tableObj = tableObj.find("table").eq(0);
         }
+        if (tableObj.find("thead").length == 0) {     //如果没有thead标签，创建一个
+            console.warn("表格 " + tableId + " 没有 thead 标签");
+            return;
+        }
+        thead = tableObj.find("thead");
+        if (tableObj.find("tbody").length == 0) {     //如果没有tbody标签，创建一个
+            console.warn("表格 " + tableId + " 没有 thead 标签");
+            tableObj.append($("<tbody/>"));
+        }
+        tbody = tableObj.find("tbody");
+        tableLength = 0;
+        keyList = new Array();
+        thead.find("tr th").each(function(i) {
+            tableLength++;
+            keyList[i] = $(this).attr("data-key");
+            if (!keyList[i]) {
+                keyList[i] = "";
+            }
+        });
+
+        tbody.empty();
+        tableObj.data("_content", tableData);
+        var tr, td, rowData;
+        for (var index in tableData) {
+            tr = $("<tr/>").attr("row", index);
+            rowData = tableData[index];
+            if (typeof(rowData) == "object") {
+                for (var k = 0; k < keyList.length; k++) {
+                    td = $("<td/>").attr("col", k);
+                    if (keyList[k]) {
+                        td.html(rowData[keyList[k]]);
+                    } else {
+                        td.html("&nbsp;");
+                    }
+                    tr.append(td);
+                }
+            }
+            tbody.append(tr);
+        }
+        tableObj.jTable();      //每次重新加载表格后，加载一次表格样式
     } catch (e) {
         console.error("function : padBackTable()\nname : " + e.name + "\nmessage : " + e.message);
     }

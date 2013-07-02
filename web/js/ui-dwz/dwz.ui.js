@@ -64,7 +64,8 @@ function initUI(_box) {
     $("div.panel", $p).jPanel();
 
     //tables
-    $("table.table", $p).jTable();
+    //取消自动加载表格样式，由padBackTable函数控制格式，或手动控制
+//    $("table.table", $p).jTable();
 
     // css tables
     $('table.list', $p).cssTable();

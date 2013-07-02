@@ -193,6 +193,11 @@ var DWZ = {
                 data: op.data,
                 cache: false,
                 success: function(response) {
+                    //动态加载js文件
+                    //页面加载之前执行。。可进行AOP处理
+                    $.getScript(this.url.replace(/\/?page\//, "js/busi/").replace(/.html|jsp|do/, ".js"), function() {
+                        //页面加载之后执行。。可进行AOP处理
+                    });
                     var json = DWZ.jsonEval(response);
 
                     if (json.statusCode == DWZ.statusCode.error) {
@@ -216,11 +221,6 @@ var DWZ = {
                     }
 
                     console.debug("请求的地址：" + this.url);
-                    //动态加载js文件
-                    //页面加载之前执行。。可进行AOP处理
-                    $.getScript(this.url.replace(/\/?page\//, "js/busi/").replace(/.html|jsp|do/, ".js"), function() {
-                        //页面加载之后执行。。可进行AOP处理
-                    });
                 },
                 error: DWZ.ajaxError,
                 statusCode: {

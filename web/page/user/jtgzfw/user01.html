@@ -3,4 +3,46 @@ To change this template, choose Tools | Templates
 and open the template in the editor.
 -->
 
-<div>TODO write content</div>
+<div class="pageHeader">
+    <form onsubmit="return navTabSearch(this);" action="demo_page1.html" method="post">
+        <div class="searchBar">
+            <table class="searchContent">
+                <tr>
+                    <td>
+                        时间：
+                    </td>
+                    <td>
+                        <select class="combox" name="time_level" id="time_level">
+                            <option value="-">1~3天</option>
+                            <option value="0">3~10天</option>
+                            <option value="1">10~30天</option>
+                            <option value="2">30天之前</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+            <div class="subBar">
+                <ul>
+                    <li><div class="buttonActive"><div class="buttonContent"><button type="submit">搜索</button></div></div></li>
+                </ul>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="pageContent">
+    <div class="panelBar">
+        <h2>30天内的注册情况</h2>
+    </div>
+    <table class="table" width="100%" layoutH="138" id="reg_table">
+        <thead>
+            <tr>
+                <th width="20%" data-key="save_time">日期</th>
+                <th width="20%" data-key="suc_count">注册成功（次）</th>
+                <th width="20%" data-key="fal_count">注册失败（次）</th>
+                <th width="20%" data-key="sum_count">总计（次）</th>
+                <th data-key="timeout_count">超过预警时间（次）</th>
+            </tr>
+        </thead>
+    </table>
+</div>
