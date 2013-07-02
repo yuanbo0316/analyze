@@ -1,0 +1,72 @@
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>日志监控与分析系统 -- 用户登录</title>
+        <script type="text/javascript" src="js/jquery/jquery-1.7.2.js"></script>
+        <script type="text/javascript" src="js/frame/frame-pc.js"></script>
+        <link href="themes/index-login.css" type="text/css" rel="stylesheet"/>
+        <script type="text/javascript">
+            $(function() {
+                $("#sub").click(function() {
+                    if (!checkForm('#data_form')) {
+                        return false;
+                    }
+                    var options = new AjaxOptions("#data_form");
+                    options.put("service_code", "S34001");
+                    options.sus = function() {
+                        sessionStorage.username = $("#username").val();
+                        showLoading();
+                        getTopWindows().location.href = "welcome.html";
+                    };
+                    $.ajax(options);
+                    return false;
+                });
+                $(":input").keydown(function(e) {
+                    if (e.keyCode == 13) {
+                        $("#sub").click();
+                    }
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <div id="index-logo">
+            <strong>日志监控与分析系统</strong>
+        </div>
+        <div class="content">
+            <h2 class="title">管理员登录</h2>
+            <hr />
+            <form id="data_form">
+                <table width="90%" align="center" class="tablelist">
+                    <tr>
+                        <td width="45%" align="right">用户名：</td>
+                        <td><input type="text" id="username" name="username" /></td>
+                    </tr>
+                    <tr>
+                        <td width="45%" align="right">密码：</td>
+                        <td><input type="password" id="password" name="password"/></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" align="center">
+                            <input type="button" value=" 登录 " id="sub" class="button" />
+                            <input type="reset" value=" 重置 " class="button" />
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        <div id="index-footer">
+            <div id="index-footer-inside">
+                <p>
+                    Copyright&nbsp;©&nbsp;2013&nbsp; 日志监控与分析系统 &nbsp;|&nbsp;
+                    &nbsp;|&nbsp;郑州聚凡网络科技有限公司
+                </p>
+            </div>
+        </div>
+    </body>
+</html>

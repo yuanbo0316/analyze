@@ -1,0 +1,223 @@
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>日志监控与分析系统</title>
+
+        <link href="themes/default/style.css" rel="stylesheet" type="text/css" media="screen"/>
+        <link href="themes/css/core.css" rel="stylesheet" type="text/css" media="screen"/>
+        <link href="themes/css/print.css" rel="stylesheet" type="text/css" media="print"/>
+
+
+        <script src="js/jquery/jquery-1.7.2.js" type="text/javascript"></script>
+        <script src="js/jquery/jquery.cookie.js" type="text/javascript"></script>
+        <script src="js/jquery/jquery.validate.js" type="text/javascript"></script>
+        <script src="js/jquery/jquery.bgiframe.js" type="text/javascript"></script>
+
+        <script src="js/ui-dwz/dwz.core.js" type="text/javascript"></script>
+        <script src="js/ui-dwz/dwz.util.date.js" type="text/javascript"></script>
+        <script src="js/ui-dwz/dwz.validate.method.js" type="text/javascript"></script>
+        <script src="js/ui-dwz/dwz.regional.zh.js" type="text/javascript"></script>
+        <script src="js/ui-dwz/dwz.barDrag.js" type="text/javascript"></script>
+        <script src="js/ui-dwz/dwz.drag.js" type="text/javascript"></script>
+        <script src="js/ui-dwz/dwz.tree.js" type="text/javascript"></script>
+        <script src="js/ui-dwz/dwz.accordion.js" type="text/javascript"></script>
+        <script src="js/ui-dwz/dwz.ui.js" type="text/javascript"></script>
+        <script src="js/ui-dwz/dwz.theme.js" type="text/javascript"></script>
+        <script src="js/ui-dwz/dwz.switchEnv.js" type="text/javascript"></script>
+        <script src="js/ui-dwz/dwz.alertMsg.js" type="text/javascript"></script>
+        <script src="js/ui-dwz/dwz.contextmenu.js" type="text/javascript"></script>
+        <script src="js/ui-dwz/dwz.navTab.js" type="text/javascript"></script>
+        <script src="js/ui-dwz/dwz.tab.js" type="text/javascript"></script>
+        <script src="js/ui-dwz/dwz.resize.js" type="text/javascript"></script>
+        <script src="js/ui-dwz/dwz.dialog.js" type="text/javascript"></script>
+        <script src="js/ui-dwz/dwz.dialogDrag.js" type="text/javascript"></script>
+        <script src="js/ui-dwz/dwz.sortDrag.js" type="text/javascript"></script>
+        <script src="js/ui-dwz/dwz.cssTable.js" type="text/javascript"></script>
+        <script src="js/ui-dwz/dwz.stable.js" type="text/javascript"></script>
+        <script src="js/ui-dwz/dwz.taskBar.js" type="text/javascript"></script>
+        <script src="js/ui-dwz/dwz.ajax.js" type="text/javascript"></script>
+        <script src="js/ui-dwz/dwz.pagination.js" type="text/javascript"></script>
+        <script src="js/ui-dwz/dwz.database.js" type="text/javascript"></script>
+        <script src="js/ui-dwz/dwz.datepicker.js" type="text/javascript"></script>
+        <script src="js/ui-dwz/dwz.effects.js" type="text/javascript"></script>
+        <script src="js/ui-dwz/dwz.panel.js" type="text/javascript"></script>
+        <script src="js/ui-dwz/dwz.checkbox.js" type="text/javascript"></script>
+        <script src="js/ui-dwz/dwz.history.js" type="text/javascript"></script>
+        <script src="js/ui-dwz/dwz.combox.js" type="text/javascript"></script>
+        <script src="js/ui-dwz/dwz.print.js" type="text/javascript"></script>
+        <!--
+        <script src="bin/dwz.min.js" type="text/javascript"></script>
+        -->
+        <script src="js/ui-dwz/dwz.regional.zh.js" type="text/javascript"></script>
+        <script src="js/frame/frame-dwz.js" type="text/javascript"></script>
+
+        <script type="text/javascript">
+            $(function() {
+                $("#login-user").html(sessionStorage.username);
+                DWZ.init("dwz.frag.xml", {
+                    loginUrl: "page/login_dialog.html", loginTitle: "登录", // 弹出登录对话框
+                    //		loginUrl:"login.html",	// 跳到登录页面
+                    statusCode: {ok: 200, error: 300, timeout: 301}, //【可选】
+                    pageInfo: {pageNum: "pageNum", numPerPage: "numPerPage", orderField: "orderField", orderDirection: "orderDirection"}, //【可选】
+                    debug: true, // 调试模式 【true|false】
+                    callback: function() {
+                        initEnv();
+                        $("#themeList").theme({themeBase: "themes"}); // themeBase 相对于index页面的主题base路径
+                    }
+                });
+                $("#welcome_logout").click(function() {
+                    var o = new AjaxOptions();
+                    o.put("service_code", "S34002");
+                    o.fal = function(){
+                        location.href = "index.html";
+                    };
+                    $.ajax(o);
+                });
+            });
+        </script>
+    </head>
+
+    <body scroll="no">
+        <div id="layout">
+            <div id="header">
+                <div class="headerNav">
+                    <a class="logo" href="http://j-ui.com">标志</a>
+                    <ul class="nav">
+                        <li><a href="#this">欢迎使用：<span id="login-user"></span></a></li>
+                        <li><a href="#this" id="welcome_logout">退出</a></li>
+                    </ul>
+                </div>
+                <!-- navMenu -->
+
+            </div>
+
+            <div id="leftside">
+                <div id="sidebar_s">
+                    <div class="collapse">
+                        <div class="toggleCollapse"><div></div></div>
+                    </div>
+                </div>
+                <div id="sidebar">
+                    <div class="toggleCollapse"><h2>主菜单</h2><div>收缩</div></div>
+
+                    <div class="accordion" fillSpace="sidebar">
+                        <div class="accordionHeader">
+                            <h2><span>Folder</span>用户行为分析</h2>
+                        </div>
+                        <div class="accordionContent">
+                            <ul class="tree treeFolder">
+                                <li><a>交通公众服务</a>
+                                    <ul>
+                                        <!-- 新用户注册人数历史，列表、曲线图，成功数、失败数 -->
+                                        <li><a href="page/user/jtgzfw/user01.html" target="navTab" rel="user01">用户注册分析</a></li>
+                                        <!-- 以时间为X轴的曲线、以天为单位的饼状图、总数的饼状图 -->
+                                        <li><a href="page/user/jtgzfw/user02.html" target="navTab" rel="user02">登录终端分布</a></li>
+                                    </ul>
+                                </li>
+                                <li><a>交通安全协会</a>
+                                    <ul>
+                                        <!-- 入会人数历史、曲线图，个人会员与团体会员的饼状图 -->
+                                        <li><a href="page/no_page.html" target="navTab" rel="main">会员入会分析</a></li>
+                                        <!-- 绑定的机动车数量历史列表、曲线图 -->
+                                        <li><a href="page/no_page.html" target="navTab" rel="main">绑定机动车分析</a></li>
+                                    </ul>
+                                </li>
+                                <!--  -->
+                                <li><a href="page/no_page.html" target="navTab" rel="main">用户登录情况</a></li>
+                                <li><a href="page/no_page.html" target="navTab" rel="main">登录人次分析</a></li>
+                                <li><a href="page/no_page.html" target="navTab" rel="main">登录IP分析</a></li>
+                                <li><a href="page/no_page.html" target="navTab" rel="main">登录失败统计</a></li>
+                                <li><a href="page/no_page.html" target="navTab" rel="main">用户操作追踪</a></li>
+
+                            </ul>
+                        </div>
+                        <div class="accordionHeader">
+                            <h2><span>Folder</span>系统服务分析</h2>
+                        </div>
+                        <div class="accordionContent">
+                            <ul class="tree treeFolder">
+                                <li><a>主要服务运行分析</a>
+                                    <ul>
+                                        <!--  -->
+                                        <li><a href="page/no_page.html" target="navTab" rel="main">交通公众服务</a></li>
+                                        <!--  -->
+                                        <li><a href="page/no_page.html" target="navTab" rel="main">交通安全协会</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="page/no_page.html" target="navTab" rel="main">服务执行时间图表</a></li>
+                                <li><a href="page/no_page.html" target="navTab" rel="main">异常服务统计</a></li>
+                            </ul>
+                        </div>
+                        <div class="accordionHeader">
+                            <h2><span>Folder</span>页面请求分析</h2>
+                        </div>
+                        <div class="accordionContent">
+                            <ul class="tree treeFolder">
+                                <li><a href="page/no_page.html" target="navTab" rel="main">异常请求统计</a></li>
+                            </ul>
+                        </div>
+                        <div class="accordionHeader">
+                            <h2><span>Folder</span>SQL语句执行分析</h2>
+                        </div>
+                        <div class="accordionContent">
+                            <ul class="tree treeFolder">
+                                <li><a href="page/no_page.html" target="navTab" rel="main">SQL执行时间图表</a></li>
+                                <li><a href="page/no_page.html" target="navTab" rel="main">超时SQL统计</a></li>
+                            </ul>
+                        </div>
+                        <div class="accordionHeader">
+                            <h2><span>Folder</span>其它</h2>
+                        </div>
+                        <div class="accordionContent">
+                            <ul class="tree treeFolder">
+                                <li><a href="page/no_page.html" target="navTab" rel="main">业务级异常统计</a></li>
+                                <li><a href="page/no_page.html" target="navTab" rel="main">系统级异常统计</a></li>
+                                <li><a href="page/no_page.html" target="navTab" rel="main">定时任务执行分析</a></li>
+                                <li><a href="page/no_page.html" target="navTab" rel="main">系统启动日志</a></li>
+                                <li><a href="page/no_page.html" target="navTab" rel="main">参数维护</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="container">
+                <div id="navTab" class="tabsPage">
+                    <div class="tabsPageHeader">
+                        <div class="tabsPageHeaderContent"><!-- 显示左右控制时添加 class="tabsPageHeaderMargin" -->
+                            <ul class="navTab-tab">
+                                <li tabid="main1" class="main"><a href="javascript:;"><span><span class="home_icon">我的主页</span></span></a></li>
+                            </ul>
+                        </div>
+                        <div class="tabsLeft">left</div><!-- 禁用只需要添加一个样式 class="tabsLeft tabsLeftDisabled" -->
+                        <div class="tabsRight">right</div><!-- 禁用只需要添加一个样式 class="tabsRight tabsRightDisabled" -->
+                        <div class="tabsMore">more</div>
+                    </div>
+                    <ul class="tabsMoreList">
+                        <li><a href="javascript:;">我的主页</a></li>
+                    </ul>
+                    <div class="navTab-panel tabsPageContent layoutBox">
+                        <div class="page unitBox">
+                            <div class="accountInfo">
+                                <p><span>DWZ富客户端框架</span></p>
+                                <p>DWZ官方微博:<a href="http://weibo.com/dwzui" target="_blank">http://weibo.com/dwzui</a></p>
+                            </div>
+                            <div class="pageFormContent" layoutH="80" style="margin-right:230px">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="footer">
+                Copyright&nbsp;©&nbsp;2013&nbsp; 日志监控与分析系统 &nbsp;|&nbsp;
+                &nbsp;|&nbsp;郑州聚凡网络科技有限公司
+            </div>
+    </body>
+</html>

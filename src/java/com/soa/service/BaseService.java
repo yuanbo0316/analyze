@@ -7,6 +7,7 @@ import com.lianzt.commondata.DataConvertFactory;
 import com.soa.exception.GlobalException;
 import com.soa.service.busi.impl.BusiService;
 import com.lianzt.util.DateUtil;
+import com.lianzt.util.LogUtil;
 import com.lianzt.util.StringUtil;
 import com.soa.util.SystemUtil;
 import java.io.Serializable;
@@ -40,7 +41,7 @@ public abstract class BaseService extends JdbcDaoSupport implements Serializable
     protected static final String SUCCESS = "000000";
     private static final String[] NULL_KEY = new String[]{};
     private static final String NO_LOGIN = "0";     //未登录标记
-    public static final String SESSION_NAME = "analyze_session_name";
+    public static final String SESSION_NAME = "ipt_session_name";
     /**
      * 一个默认的RowMapper实现，返回一个CommonData，结果集中的每一列都被当作String对象，CommonData中的key为结果集的列名称
      */
@@ -344,7 +345,7 @@ public abstract class BaseService extends JdbcDaoSupport implements Serializable
         long sqlTime = new Date().getTime() - begin.getTime();
         //记录可分析的日志，由于LogUtil只提供了参数为CommonData的方法，而此处没有使用CommonData，如果创建一个CommonData会消耗不必要的资源，
         //所以按照可分析日志的格式，拼接了一个json字符串。
-        log.info("分析日志\n['log-sql-time']\t{sql:'" + sqlName + "', args:'" + StringUtil.connectArray(objects, ",") + "', database:'local', _runTime:" + sqlTime + "}");
+        LogUtil.analysisJsonLog("{\"sql\":\"" + sqlName + "\", \"args\":\"" + StringUtil.connectArray(objects, ",") + "\", \"database\":\"local\", \"_runTime\":" + sqlTime + "}", "sql-time");
         return acd;
     }
 
@@ -397,7 +398,7 @@ public abstract class BaseService extends JdbcDaoSupport implements Serializable
         long sqlTime = new Date().getTime() - begin.getTime();
         //记录可分析的日志，由于LogUtil只提供了参数为CommonData的方法，而此处没有使用CommonData，如果创建一个CommonData会消耗不必要的资源，
         //所以按照可分析日志的格式，拼接了一个json字符串。
-        log.info("分析日志\n['log-sql-time']\t{sql:'" + sqlName + "', args:'" + StringUtil.connectArray(objects, ",") + "', database:'local', _runTime:" + sqlTime + "}");
+        LogUtil.analysisJsonLog("{\"sql\":\"" + sqlName + "\", \"args\":\"" + StringUtil.connectArray(objects, ",") + "\", \"database\":\"local\", \"_runTime\":" + sqlTime + "}", "sql-time");
         return list;
     }
 
@@ -416,7 +417,7 @@ public abstract class BaseService extends JdbcDaoSupport implements Serializable
         long sqlTime = new Date().getTime() - begin.getTime();
         //记录可分析的日志，由于LogUtil只提供了参数为CommonData的方法，而此处没有使用CommonData，如果创建一个CommonData会消耗不必要的资源，
         //所以按照可分析日志的格式，拼接了一个json字符串。
-        log.info("分析日志\n['log-sql-time']\t{sql:'" + sqlName + "', args:'" + StringUtil.connectArray(objects, ",") + "', database:'local',update_line:" + line + ",  _runTime:" + sqlTime + "}");
+        LogUtil.analysisJsonLog("{\"sql\":\"" + sqlName + "\", \"args\":\"" + StringUtil.connectArray(objects, ",") + "\", \"database\":\"local\", \"_runTime\":" + sqlTime + "}", "sql-time");
         return line;
     }
 
@@ -481,7 +482,8 @@ public abstract class BaseService extends JdbcDaoSupport implements Serializable
                 return objArrs.length;
             }
         });
-//        log.info("分析日志\n['log-sql-time']\t{sql:'" + sqlName + "', args:'" + StringUtil.connectArray(objects, ",") + "', database:'local',update_line:" + line + ",  _runTime:" + sqlTime + "}");
+        long sqlTime = new Date().getTime() - begin.getTime();
+        LogUtil.analysisJsonLog("{\"sql\":\"" + sqlName + "\", \"times\":\"" + objArrs.length + "\", \"database\":\"local\", \"_runTime\":" + sqlTime + "}", "sql-time");
         return res;
     }
 
