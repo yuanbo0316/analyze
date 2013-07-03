@@ -19,7 +19,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class RegJtgzfwUser extends BaseService {
 
-    private final String REG_SERVICE = "S23002";        //注册服务
+    private final String REG_SERVICE = "P23001";        //注册服务
     private final String REG_SERVER = "jtgzfw";        //
 
     @Override
