@@ -10,6 +10,15 @@
             var aStyles = [];
             var $tc = $table.parent().addClass("j-resizeGrid"); // table parent container
             var layoutH = $(this).attr("layoutH");
+            var lazyLayoutH = $(this).attr("lazy-layoutH");
+            $(this).show();
+            if (lazyLayoutH) {
+                $(this).attr('layoutH', lazyLayoutH);
+                layoutH = lazyLayoutH;
+            } else {
+                $(this).attr("lazy-layoutH", layoutH);
+            }
+            var id = $(this).attr("id");
 
             var oldThs = $table.find("thead>tr:last-child").find("th");
 
@@ -20,11 +29,15 @@
                 style[1] = $th.attr("align");
                 aStyles[aStyles.length] = style;
             }
-            $(this).wrap("<div class='grid'></div>");
+            $("#" + id + "-grid").remove();     //删除原有的grid
+            var tableClone = $(this).clone().hide().attr("stable", "true").removeAttr("layoutH");        //复制新的table
+            $(this).after(tableClone);
+
+            $(this).wrap("<div class='grid' id='" + id + "-grid'></div>");
             var $grid = $table.parent().html($table.html());
             var thead = $grid.find("thead");
             //生成的新表格增加id项
-            thead.wrap("<div class='gridHeader'><div class='gridThead'><table style='width:" + (tlength - 20) + "px;' id='" + $(this).attr("id") + "'></table></div></div>");
+            thead.wrap("<div class='gridHeader'><div class='gridThead'><table style='width:" + (tlength - 20) + "px;' id='" + id + "-head' lazy-layoutH='" + layoutH + "'></table></div></div>");
 
             var lastH = $(">tr:last-child", thead);
             var ths = $(">th", lastH);
@@ -46,7 +59,7 @@
             var tbody = $grid.find(">tbody");
             var layoutStr = layoutH ? " layoutH='" + layoutH + "'" : "";
 
-            tbody.wrap("<div class='gridScroller'" + layoutStr + " style='width:" + $tc.width() + "px;'><div class='gridTbody'><table style='width:" + (tlength - 20) + "px;'></table></div></div>");
+            tbody.wrap("<div class='gridScroller'" + layoutStr + " style='width:" + $tc.width() + "px;' id='" + id + "-gridScroller'><div class='gridTbody'><table style='width:" + (tlength - 20) + "px;' id='" + id + "-body'></table></div></div>");
             var ftr = $(">tr:first-child", tbody);
             var $trs = tbody.find('>tr');
 

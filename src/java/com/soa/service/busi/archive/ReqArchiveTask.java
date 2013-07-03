@@ -14,6 +14,10 @@ import org.springframework.transaction.annotation.Transactional;
 /**
  * P32005
  * url请求数据归档
+ * 说明：对3天前的归档，整理成IP访问；
+ * 3天前的数据整理成每小时一条，归档级别为0，然后删除原始数据；
+ * 10天前的数据整理成每天一条，归档级别为1，然后删除原始数据；
+ * 1个月前的数据整理成每月一条，归档级别为2，然后删除原始数据；
  * @author lianzt
  */
 @Service

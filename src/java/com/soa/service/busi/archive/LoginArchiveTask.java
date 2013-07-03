@@ -17,6 +17,9 @@ import org.springframework.transaction.annotation.Transactional;
 /**
  * P32009
  * 用户登录信息归档
+ * 说明：每次执行对前一天的日志进行归档，整理成用户的登录历史和系统用户登录人次表，然后删除30天之前的数据；
+ * （用户登录历史表：每个用户从一类终端登录记录一条数据，记录最后登录时间和登录总次数）
+ * （用户登录人次表：每个监控子系统每天记录一条数据，记录用户数和登录次数）
  * @author lianzt
  */
 @Service

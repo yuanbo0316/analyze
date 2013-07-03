@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 /**
  * P32003
  * 对service运行记录归档
+ * 说明：删除10天前的服务运行数据（每天的数据量大概为15万条）
  * @author lianzt
  */
 @Service

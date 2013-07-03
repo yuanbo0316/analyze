@@ -14,6 +14,10 @@ import org.springframework.transaction.annotation.Transactional;
 /**
  * P32004
  * 对service运行快照归档
+ * 说明：快照表保存3天内的数据，
+ * 3天后的数据转移到归档表，每小时整理一条数据，归档级别为0，删除归档前的数据；
+ * 10天后的数据每天整理一条，归档级别为1，删除归档前的数据；
+ * 一个月前的数据，每月整理一条，归档级别为2，删除归档前的数据；
  * @author lianzt
  */
 @Service

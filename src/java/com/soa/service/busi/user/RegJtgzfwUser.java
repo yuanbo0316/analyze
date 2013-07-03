@@ -19,7 +19,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class RegJtgzfwUser extends BaseService {
 
-    private final String REG_SERVICE = "P23001";        //注册服务
+    private final String REG_SERVICE = "S23002";        //注册服务
     private final String REG_SERVER = "jtgzfw";        //
 
     @Override
@@ -29,12 +29,7 @@ public class RegJtgzfwUser extends BaseService {
 
     @Override
     public void execute(AbstractCommonData in, AbstractCommonData inHead, AbstractCommonData out, AbstractCommonData outHead) {
-        Date time = new Date();
-        time = DateUtil.setHour(time, 0);
-        time = DateUtil.setMinute(time, 0);
-        time = DateUtil.setSecond(time, 0);
-        time = DateUtil.addDay(time, -31);
-        List<AbstractCommonData> regTable = queryList("get_reg_jtgzfw_user", new Object[]{REG_SERVICE, REG_SERVER, time});
+        List<AbstractCommonData> regTable = queryList("get_reg_jtgzfw_user", new Object[]{REG_SERVICE, REG_SERVER});
         out.putArrayValue("reg_table", regTable);
     }
 }

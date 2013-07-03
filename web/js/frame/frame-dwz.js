@@ -632,21 +632,19 @@ function padBackData(data, form, isDialog) {
  * @param tableId 表格的id
  */
 function padBackTable(tableData, tableId, isDialog) {
-    var tableObj, tableLength, keyList, thead, tbody;
+    var tableObj, tableLength, keyList, thead, tbody, page;
     try {
         if (isDialog) {
-            tableObj = $(tableId, $.pdialog.getCurrent());                        // 获取当前dialog中的xxxId
+            page = $.pdialog.getCurrent();                       // 获取当前dialog中的xxxId
         } else {
-            tableObj = $(tableId, navTab.getCurrentPanel());                      // 获取当前navTab中的xxxId
+            page = navTab.getCurrentPanel();                    // 获取当前navTab中的xxxId
         }
+        tableObj = $(tableId, page);
         if (!tableObj.length) {
             console.warn("表格 " + tableId + " 不存在！");
             return;
         }
-        if (tableObj.get(0).tagName.toLocaleLowerCase() != "table") {
-            tableObj = tableObj.find("table").eq(0);
-        }
-        if (tableObj.find("thead").length == 0) {     //如果没有thead标签，创建一个
+        if (tableObj.find("thead").length == 0) {
             console.warn("表格 " + tableId + " 没有 thead 标签");
             return;
         }
@@ -656,6 +654,7 @@ function padBackTable(tableData, tableId, isDialog) {
             tableObj.append($("<tbody/>"));
         }
         tbody = tableObj.find("tbody");
+
         tableLength = 0;
         keyList = new Array();
         thead.find("tr th").each(function(i) {
@@ -685,7 +684,14 @@ function padBackTable(tableData, tableId, isDialog) {
             }
             tbody.append(tr);
         }
-        tableObj.jTable();      //每次重新加载表格后，加载一次表格样式
+
+        if (tableObj.attr("stable") == "true") {
+            tableObj.jTable();
+            $("#" + tableId + "-gridScroller", page).layoutH();
+        } else if (tableObj.attr("class").indexOf("list") != -1) {
+            tableObj.cssTable();        //完成后加载表格样式
+        }
+
     } catch (e) {
         console.error("function : padBackTable()\nname : " + e.name + "\nmessage : " + e.message);
     }
