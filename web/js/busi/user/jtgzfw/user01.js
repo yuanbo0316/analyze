@@ -21,7 +21,6 @@ o.sus = function(data) {
         series[2].data[i] = Number(regTable[i].sum_count);
         series[3].data[i] = Number(regTable[i].timeout_count);
     }
-        console.debug(json2string(series));
     $('#reg-line').highcharts({
         chart: {type: 'spline'},
         title: {text: '最近10天的用户注册情况'},
