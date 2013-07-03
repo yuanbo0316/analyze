@@ -14,7 +14,6 @@
         <listener-class>org.springframework.web.util.LogbackConfigListener</listener-class>
     </listener>
     <!-- logback spring 配置 end -->
-
     <!-- 字符集 begin -->
     <filter>
         <filter-name>EncodingFilter</filter-name>
@@ -49,6 +48,14 @@
     <servlet-mapping>
         <servlet-name>do</servlet-name>
         <url-pattern>*.do</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ErrorMsgServlet</servlet-name>
+        <servlet-class>com.soa.websocket.ErrorMsgServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ErrorMsgServlet</servlet-name>
+        <url-pattern>/ErrorMsgServlet</url-pattern>
     </servlet-mapping>
     <!-- tomcat7 数据库连接池在/META-INF/context.xml 中配置 begin -->
     <resource-ref>

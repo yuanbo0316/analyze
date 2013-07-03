@@ -68,6 +68,7 @@
     <logger name="com.soa.controller" level="DEBUG"/>
     <logger name="com.soa.plugin" level="DEBUG"/>
     <logger name="com.soa.listener" level="INFO"/>
+    <logger name="com.soa.websocket" level="DEBUG"/>
     <!-- debug end -->
 
     <!-- root 默认日志配置 -->

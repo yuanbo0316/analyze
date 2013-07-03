@@ -55,7 +55,6 @@ and open the template in the editor.
         -->
         <script src="js/ui-dwz/dwz.regional.zh.js" type="text/javascript"></script>
         <script src="js/jquery/highcharts.js" type="text/javascript"></script>
-        <script src="js/frame/frame-dwz.js" type="text/javascript"></script>
 
         <script type="text/javascript">
             $(function() {
@@ -74,13 +73,16 @@ and open the template in the editor.
                 $("#welcome_logout").click(function() {
                     var o = new AjaxOptions();
                     o.put("service_code", "S34002");
-                    o.after = function(){
+                    o.after = function() {
                         location.href = "index.html";
                     };
                     $.ajax(o);
                 });
+
             });
         </script>
+        <script src="js/frame/frame-dwz.js" type="text/javascript"></script>
+        <script src="js/frame/frame-notice.js" type="text/javascript"></script>
     </head>
 
     <body scroll="no">
@@ -90,6 +92,7 @@ and open the template in the editor.
                     <a class="logo" href="http://j-ui.com">标志</a>
                     <ul class="nav">
                         <li><a href="#this">欢迎使用：<span id="login-user"></span></a></li>
+                        <li><a href="#this" id="change_notice">开启通知</a></li>
                         <li><a href="#this" id="welcome_logout">退出</a></li>
                     </ul>
                 </div>
