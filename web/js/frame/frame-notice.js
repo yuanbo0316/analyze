@@ -54,19 +54,16 @@ function createSocket() {
     ws.onmessage = function(evt) {
         console.log(evt.data);
         notice("服务器端通知(单击可查看)", evt.data, function() {
-            this.cancel;
             //跳转到异常查询页面
             navTab.openTab('user01', 'page/user/jtgzfw/user01.html', {title: "New Tab", fresh: true});
             _no_read_count = 0;
             //激活弹出该通知窗口的浏览器窗口
             window.focus();
-            //打开IM窗口
-            WM.openWinByID();
         });
     };
 
     ws.onclose = function(evt) {
-        console.log("close");
+        notice("与服务器端的连接中断", "");
     };
 
     ws.onopen = function(evt) {

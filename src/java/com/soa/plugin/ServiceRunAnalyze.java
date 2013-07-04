@@ -12,6 +12,7 @@ import com.soa.exception.GlobalException;
 import com.soa.plugin.impl.AnalyzePlugin;
 import com.soa.service.BaseService;
 import com.soa.util.SystemUtil;
+import java.util.Date;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -60,6 +61,7 @@ public class ServiceRunAnalyze implements AnalyzePlugin {
 
         //计算完成后开始保存请求
         AbstractCommonData in = DataConvertFactory.getInstance();
+        in.putDateValue("exec_time", new Date(event.getTimeStamp()));
         in.putStringValue("server", server);
         in.putDataValue("json", json);
         BaseService.runService(in, "P31003");     //保存服务

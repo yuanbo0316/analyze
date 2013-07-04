@@ -41,7 +41,7 @@ public class SaveLoginService extends BaseService {
         }
         //insert into log_login_info (exec_time,server,username,ip,user_agent,from_node,opt,response_code,response_desc) value (?,?,?,?,?,?,?,?,?)
         Object[] args = new Object[9];
-        args[0] = new Date();
+        args[0] = in.getDateValue("exec_time");
         args[1] = in.getStringValue("server");
         args[2] = username;
         args[3] = jsonHead.getStringValue("_ip");

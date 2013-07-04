@@ -39,7 +39,7 @@ public class SaveRunService extends BaseService {
         AbstractCommonData session = json.getDataValue("ipt_session_id");
         //insert into log_service_run (exec_time,service_code,server,username,ip,args,run_time,from_node,is_timeout,response_code,response_desc) value (?,?,?,?,?,?,?,?,?,?,?)
         Object[] args = new Object[11];
-        args[0] = new Date();
+        args[0] = in.getDateValue("exec_time");
         args[1] = jsonHead.getStringValue("service_code");
         args[2] = in.getStringValue("server");
         args[3] = jsonHead.getStringValue("username");

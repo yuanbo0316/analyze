@@ -40,7 +40,7 @@ public class SaveTimeoutSql extends BaseService {
     public void execute(AbstractCommonData in, AbstractCommonData inHead, AbstractCommonData out, AbstractCommonData outHead) {
         //判断是否为批量更新的sql
         AbstractCommonData sqlArgs = DataConvertFactory.getInstanceEmpty();
-        sqlArgs.putDateValue("save_time", new Date());
+        sqlArgs.put("save_time", in.get("save_time"));
         sqlArgs.put("sql_value", in.get("sql_value"));
         sqlArgs.put("sql_name", in.get("sql"));
         sqlArgs.put("server", in.get("server"));

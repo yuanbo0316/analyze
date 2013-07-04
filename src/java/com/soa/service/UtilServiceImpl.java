@@ -172,6 +172,7 @@ public class UtilServiceImpl extends BaseService implements UtilService {
             errCode = ge.getErrorCode() + "";
             errMsg = ge.getErrorMsg();
         }
+        log.error("保存的异常：", e);
         //记录错误日志
         try {
             if (getJdbcTemplate().update(SAVE_ERROR, SystemUtil.getSerialNum(), errCode, errMsg, StringUtil.getExceptionStack(e)) > 0) {

@@ -30,7 +30,7 @@ public class LogStratAnalyze implements AnalyzePlugin {
         }
         String msg = event.getMessage();
         log.debug("接收的{}标记的数据{}",logMark,json);
-        
+
         //opt：stop--0;start--1
         String opt;
         if(json.getStringValue("opt").equals("stop")){
@@ -38,15 +38,15 @@ public class LogStratAnalyze implements AnalyzePlugin {
         }else{
             opt = "1";
         }
-        
-        
-        AbstractCommonData in = DataConvertFactory.getInstance();       
+
+
+        AbstractCommonData in = DataConvertFactory.getInstance();
         in.putStringValue("opt", opt);
         in.putStringValue("server", server);
-        in.putDateValue("exec_time", new Date());
+        in.putDateValue("exec_time", new Date(event.getTimeStamp()));
         BaseService.runService(in, "P33001");
     }
-    
+
     @Override
     public AbstractCommonData getFlash() {
        return null;
@@ -54,12 +54,12 @@ public class LogStratAnalyze implements AnalyzePlugin {
 
     @Override
     public void clear() {
-       
+
     }
 
     @Override
     public void saveFlash() {
-        
+
     }
-    
+
 }

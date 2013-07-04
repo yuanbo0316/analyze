@@ -39,7 +39,7 @@ public class SaveRequest extends BaseService {
         }
         //insert into log_req_run (req_time,req_url,server,username,ip,args,user_agent,run_time,is_timeout,response_code,response_desc) value (?,?,?,?,?,?,?,?,?,?,?)
         Object[] args = new Object[11];
-        args[0] = new Date();
+        args[0] = in.getDateValue("req_time");
         args[1] = jsonHead.getStringValue("_url");
         args[2] = in.getStringValue("server");
         args[3] = username;

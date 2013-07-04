@@ -46,7 +46,7 @@ public class WarnLogAnalyze implements AnalyzePlugin {
         log.debug("接收到WARN日志：{}", msg);
         AbstractCommonData in = DataConvertFactory.getInstance();
         in.putStringValue("server", server);
-        in.putDateValue("save_time", new Date());
+        in.putDateValue("save_time", new Date(event.getTimeStamp()));
         in.putStringValue("class_name", event.getLoggerName());
         in.putStringValue("msg", msg);
         Matcher m = p.matcher(msg);

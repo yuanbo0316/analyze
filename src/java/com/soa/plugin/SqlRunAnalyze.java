@@ -12,6 +12,7 @@ import com.soa.exception.GlobalException;
 import com.soa.plugin.impl.AnalyzePlugin;
 import com.soa.service.BaseService;
 import com.soa.util.SystemUtil;
+import java.util.Date;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import org.slf4j.Logger;
@@ -97,6 +98,7 @@ public class SqlRunAnalyze implements AnalyzePlugin {
         if (isTimeout) {
             AbstractCommonData in = DataConvertFactory.getInstance();
             in.putAll(json);
+            in.putDateValue("save_time", new Date(event.getTimeStamp()));
             in.putStringValue("server", server);
             in.putStringValue("log_mark", logMark);
             in.putStringValue("sql_value", SystemUtil.serverSql.get(server + "." + json.getStringValue("sql")));

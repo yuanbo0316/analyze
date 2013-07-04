@@ -10,6 +10,7 @@ import com.lianzt.commondata.DataConvertFactory;
 import com.lianzt.util.StringUtil;
 import com.soa.plugin.impl.AnalyzePlugin;
 import com.soa.service.BaseService;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import javax.annotation.PostConstruct;
@@ -67,6 +68,7 @@ public class LoginAnalyze implements AnalyzePlugin {
 
         //计算完成后开始保存请求
         AbstractCommonData in = DataConvertFactory.getInstance();
+        in.putDateValue("exec_time", new Date(event.getTimeStamp()));
         in.putStringValue("server", server);
         in.putStringValue("opt", opt);
         in.putDataValue("json", json);
