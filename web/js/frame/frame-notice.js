@@ -55,7 +55,7 @@ function createSocket() {
         console.log(evt.data);
         notice("服务器端通知(单击可查看)", evt.data, function() {
             //跳转到异常查询页面
-            navTab.openTab('user01', 'page/user/jtgzfw/user01.html', {title: "New Tab", fresh: true});
+            navTab.openTab('st-err', 'page/other/st-err.html', {title: "系统级异常统计", fresh: true});
             _no_read_count = 0;
             //激活弹出该通知窗口的浏览器窗口
             window.focus();

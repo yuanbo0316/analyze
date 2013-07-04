@@ -67,6 +67,10 @@ var balkTime = 1000;
  * 页面中的可操作元素，文本框和按钮等
  */
 var pageElement;
+/**
+ * 系统参数 st_table_paramet 表
+ */
+var _paramets = {};
 
 /**
  * 获取最顶层的窗口
@@ -85,7 +89,137 @@ function getTopWindows() {
  * 在form中点击回车键是默认的提交事件
  */
 $(document).ready(function() {
+    var o = new AjaxOptions();
+    o.put("service_code", "S10002");
+    o.isPadBack = false;
+    o.beforeSend = function() {
+        this.data = this.data + "&_type=ajax";
+        return true;
+    };
+    o.sus = function(data) {
+        var list = data.st_para;
+        for (var i = 0; i < list.length; i++) {
+            var key = list[i].table_name + "." + list[i].col_name;
+            if (!_paramets[key]) {
+                _paramets[key] = [list[i]];
+            } else {
+                _paramets[key].push(list[i]);
+            }
+        }
+    };
+    $.ajax(o);
+
+    $.fn.extend({
+        /**
+         * 绑定在按钮上，获取表格中被选中行的json数据
+         */
+        getRow: function() {
+            var tableId = $(this).attr("target-table");
+            if (!tableId) {
+                console.error("没有 target_table 标签");
+                return {};
+            }
+            var table = $("#" + tableId, $(this).parents(".unitBox:first"));
+            if (!table.length) {
+                console.error("没有找到 " + tableId + " 表格！");
+                return {};
+            }
+            var tableData = table.data("_content");
+            var row = Number("{rowid}".replaceTmById($(this).parents(".unitBox:first")));
+            return tableData[row];
+        },
+        /**
+         * 绑定在表格上，表格的分布查询函数
+         * @param {type} json
+         * @param {type} callback
+         */
+        cutPage: function(json, callback) {
+            if ($(this).get(0).tagName.toLocaleLowerCase() != "table") {
+                console.err("分页对象不为table");
+                return;
+            }
+            json.page_size = json.page_size ? json.page_size : 50;
+            var table = $(this);
+            table.data("_json", json).data("_callback", callback);      //把json数据和回调函数保存在表格中
+            var panelBar = table.find("~ div.panelBar");
+            if (!panelBar.length) {
+                panelBar = $("<div/>").addClass("panelBar");
+            } else {
+                panelBar.empty();
+            }
+            panelBar.data("_table", table);     //把表格对象保存到导航中
+            var pageNav = $("<div/>").addClass("pagination");
+            panelBar.append(pageNav);
+            table.after(panelBar);
+            var o = new AjaxOptions();
+            for (var i in json) {
+                o.put(i, json[i]);
+            }
+            o.isPadBack = false;
+            o.sus = function(data) {
+                if ($.isFunction(callback)) {
+                    callback(data.result);
+                    var pages = $("<span/>").css({"line-height": "24px", "padding-left": "20px"}).html("本页 " + data.now_size + " 条，共 " + data.page_count + " 页 " + data.count + " 条。");
+                    panelBar.prepend(pages);
+                    pageNav.pagination({
+                        totalCount: data.count, //总页数
+                        numPerPage: json.page_size, //每页记录数
+                        pageNumShown: 10, //显示的页码数
+                        currentPage: data.page      //当前页数
+                    });
+                    if (table.parents(".unitBox:first").attr("class").indexOf("page") == -1) {
+                        padBackTable(data.result, "#" + table.attr("id"), true);
+                    } else {
+                        padBackTable(data.result, "#" + table.attr("id"));
+                    }
+                }
+            };
+            $.ajax(o);
+        }
+    });
 });
+
+/**
+ * 获取参数数组
+ * @param {string} col table_name.col_name
+ * @returns {array[json]}
+ */
+function getParaList(col) {
+    return _paramets[col];
+}
+
+/**
+ * 初始化下拉列表
+ * @param {string} col table_name.col_name
+ * @param {string} key col_value
+ */
+function initParaSelect(col, obj) {
+    if (obj == null || obj.length < 1)
+        return;
+    var arr = getParaList(col);
+    if (arr)
+        for (var i = 0; i < arr.length; i++) {
+            obj.append($("<option/>").attr("value", arr[i].col_value).html(arr[i].value_desc));
+        }
+}
+
+/**
+ * 获取参数对应的值
+ * @param {string} col table_name.col_name
+ * @param {string} key col_value
+ * @returns {string} col_desc
+ */
+function getParaValue(col, key) {
+    var v = getParaList(col);
+    if (v) {
+        for (var i = 0; i < v.length; i++) {
+            if (v[i].col_value == key) {
+                return v[i].value_desc;
+            }
+        }
+    }
+    return "";
+}
 
 /**
  * 显示加载进度
@@ -669,7 +803,7 @@ function padBackTable(tableData, tableId, isDialog) {
         tableObj.data("_content", tableData);
         var tr, td, rowData;
         for (var index in tableData) {
-            tr = $("<tr/>").attr("row", index);
+            tr = $("<tr/>").attr({"row": index, "target": "rowid", "rel": index});
             rowData = tableData[index];
             if (typeof(rowData) == "object") {
                 for (var k = 0; k < keyList.length; k++) {
@@ -685,7 +819,7 @@ function padBackTable(tableData, tableId, isDialog) {
             tbody.append(tr);
         }
 
-        if (tableObj.attr("stable") == "true") {
+        if (tableObj.attr("class").indexOf("table") != -1) {
             tableObj.jTable();
             $("#" + tableId + "-gridScroller", page).layoutH();
         } else if (tableObj.attr("class").indexOf("list") != -1) {
@@ -845,7 +979,7 @@ function structData(data) {
         if (str) {
             str = str + "&";
         }
-        if (typeof(data[i]) == "string") {
+        if (typeof(data[i]) != "object") {
             str = str + i + "=" + data[i];
         } else {
             for (var j in data[i]) {

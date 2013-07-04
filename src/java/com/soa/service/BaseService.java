@@ -100,12 +100,14 @@ public abstract class BaseService extends JdbcDaoSupport implements Serializable
      * @param req
      */
     public static void flushSession(AbstractCommonData req) {
-        if (true) {      //只有在集群部署时才需要刷新session
+        if (!SystemUtil.sessionCache) {      //只有在集群部署时才需要刷新session
             if (log.isDebugEnabled()) {
                 log.debug("put session : " + req.getDataValue(SESSION_NAME));
             }
             HttpSession hs = (HttpSession) req.getObjectValue("session");
-            hs.setAttribute(SESSION_NAME, req.getDataValue(SESSION_NAME));
+            if (req.get(SESSION_NAME) != null) {
+                hs.setAttribute(SESSION_NAME, req.getDataValue(SESSION_NAME));
+            }
             hs.setAttribute("_timesamp", new Date().getTime());
 //            HttpSession hs = (HttpSession) req.getObjectValue("session");
 //            AbstractCommonData oldSes = (AbstractCommonData) hs.getAttribute(CookiesInterceptor.COOKIE_NAME);

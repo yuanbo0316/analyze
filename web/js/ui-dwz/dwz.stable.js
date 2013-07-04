@@ -5,20 +5,23 @@
 (function($) {
     $.fn.jTable = function(options) {
         return this.each(function() {
-            var $table = $(this), nowrapTD = $table.attr("nowrapTD");
+            $(this).hide().attr("lazy-layoutH", $(this).attr("layoutH")).removeAttr("layoutH");
+            var $table = $(this).clone(true), nowrapTD = $table.attr("nowrapTD");
+            $table.attr("layoutH",$table.attr("lazy-layoutH")).removeAttr("lazy-layoutH").show();
+            $(this).after($table);
             var tlength = $table.width();
             var aStyles = [];
             var $tc = $table.parent().addClass("j-resizeGrid"); // table parent container
-            var layoutH = $(this).attr("layoutH");
-            var lazyLayoutH = $(this).attr("lazy-layoutH");
-            $(this).show();
-            if (lazyLayoutH) {
-                $(this).attr('layoutH', lazyLayoutH);
-                layoutH = lazyLayoutH;
-            } else {
-                $(this).attr("lazy-layoutH", layoutH);
-            }
-            var id = $(this).attr("id");
+            var layoutH = $table.attr("layoutH");
+//            var lazyLayoutH = $(this).attr("lazy-layoutH");
+//            $(this).show();
+//            if (lazyLayoutH) {
+//                $(this).attr('layoutH', lazyLayoutH);
+//                layoutH = lazyLayoutH;
+//            } else {
+//                $(this).attr("lazy-layoutH", layoutH);
+//            }
+            var id = $table.attr("id");
 
             var oldThs = $table.find("thead>tr:last-child").find("th");
 
@@ -30,10 +33,10 @@
                 aStyles[aStyles.length] = style;
             }
             $("#" + id + "-grid").remove();     //删除原有的grid
-            var tableClone = $(this).clone().hide().attr("stable", "true").removeAttr("layoutH");        //复制新的table
-            $(this).after(tableClone);
+//            var tableClone = $(this).clone(true).hide().attr("stable", "true").removeAttr("layoutH");        //复制新的table，并隐藏
+//            $(this).after(tableClone);      //把新表格放到dom中
 
-            $(this).wrap("<div class='grid' id='" + id + "-grid'></div>");
+            $table.wrap("<div class='grid' id='" + id + "-grid'></div>");
             var $grid = $table.parent().html($table.html());
             var thead = $grid.find("thead");
             //生成的新表格增加id项

@@ -199,13 +199,20 @@ var DWZ = {
                         if (json.message)
                             alertMsg.error(json.message);
                     } else {
-                        $this.html(response).initUI();
-                        if ($.isFunction(op.callback))
-                            op.callback(response);
+                        $this.html(response);
                         //动态加载js文件
                         //页面加载之前执行。。可进行AOP处理
+//                        var jsUrl = "";
+//                        if (this.url.indexOf("page/") == 0 || this.url.indexOf("page/") == 1) {
+//                            jsUrl = this.url.replace(/\/?page\//, "js/busi/").replace(/.html|jsp|do/, ".js");
+//                        } else {
+//                            var cutUrl = this.url.substr(0,this.url.lastIndexOf("/")+1) +
+//                        }
                         $.getScript(this.url.replace(/\/?page\//, "js/busi/").replace(/.html|jsp|do/, ".js"), function() {
                             //页面加载之后执行。。可进行AOP处理
+                            $this.initUI();
+                            if ($.isFunction(op.callback))
+                                op.callback(response);
                         });
                     }
 

@@ -1,0 +1,71 @@
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<div class="pageHeader">
+    <form id="search-form">
+        <div class="searchBar">
+            <table class="searchContent">
+                <tr>
+                    <td>
+                        开始时间：<input type="text" class="date required" id="begin" readonly="readonly" />&nbsp;&nbsp;
+                        <select id="begin-hour"></select>:<select id="begin-minute"></select>:<select id="begin-second"></select>
+                    </td>
+                    <td>
+                        结束时间：<input type="text" class="date required" id="end" readonly="readonly"/>&nbsp;&nbsp;
+                        <select id="end-hour"></select>:<select id="end-minute"></select>:<select id="end-second"></select>
+                    </td>
+                    <td width="50">
+                        监控系统：
+                    </td>
+                    <td>
+                        <select id="server" class="combox">
+                            <option value="" selected="selected">全部</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+            <div class="subBar">
+                <ul>
+                    <li><div class="buttonActive"><div class="buttonContent"><button type="button" id="search-button">查询</button></div></div></li>
+                    <li><div class="buttonActive"><div class="buttonContent"><button type="button" id="search-today">查询今天</button></div></div></li>
+                </ul>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="pageContent">
+    <div class="panelBar">
+        <ul class="toolBar">
+            <li><a class="edit" id="edit" target-table="error_list"><span>查看详细</span></a></li>
+        </ul>
+    </div>
+    <table class="table" width="100%" layoutH="154" id="error_list">
+        <thead>
+            <tr>
+                <th data-key="save_time">时间</th>
+                <th data-key="server">系统</th>
+                <th data-key="class_name">输出日志的类</th>
+                <th data-key="msg">异常信息</th>
+                <th>jvm异常堆栈信息</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+<!--    <div class="panelBar">
+        <div class="pages">
+            <span>每页显示</span>
+            <select class="combox" name="numPerPage" onchange="navTabPageBreak({numPerPage: this.value})">
+                <option value="20">20</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+                <option value="200">200</option>
+            </select>
+            <span>条，共${totalCount}条</span>
+        </div>
+        <div class="pagination"></div>
+    </div>-->
+</div>

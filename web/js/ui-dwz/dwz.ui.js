@@ -264,17 +264,17 @@ function initUI(_box) {
         });
     });
 
-    $("div.pagination", $p).each(function() {
-        var $this = $(this);
-        $this.pagination({
-            targetType: $this.attr("targetType"),
-            rel: $this.attr("rel"),
-            totalCount: $this.attr("totalCount"),
-            numPerPage: $this.attr("numPerPage"),
-            pageNumShown: $this.attr("pageNumShown"),
-            currentPage: $this.attr("currentPage")
-        });
-    });
+//    $("div.pagination", $p).each(function() {
+//        var $this = $(this);
+//        $this.pagination({
+//            targetType: $this.attr("targetType"),
+//            rel: $this.attr("rel"),
+//            totalCount: $this.attr("totalCount"),
+//            numPerPage: $this.attr("numPerPage"),
+//            pageNumShown: $this.attr("pageNumShown"),
+//            currentPage: $this.attr("currentPage")
+//        });
+//    });
 
     if ($.fn.sortDrag)
         $("div.sortDrag", $p).sortDrag();
