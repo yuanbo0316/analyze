@@ -1,8 +1,9 @@
-delete from st_service_bean where service_code in ('S34001','S34002', 'S34101');
+delete from st_service_bean where service_code in ('S34001','S34002', 'S34101','S34102');
 
 insert into st_service_bean value ('S34001', 'userLoginPl', '用户登录', 'N');
 insert into st_service_bean value ('S34002', 'userLogoutPl', '用户注销', 'N');
 insert into st_service_bean value ('S34101', 'regJtgzfwUser', '用户注册分析', 'Y');
+insert into st_service_bean value ('S34102', 'loginJtgzfwUser', '登录终端分布', 'Y');
 
 delete from st_err_msg where err_code in (310003);
 
