@@ -56,7 +56,7 @@ $("#edit", navTab.getCurrentPanel()).click(function() {
     var rowData = $(this).getRow();
     if (rowData) {
         sessionStorage.st_err_detail = JSON.stringify(rowData);
-        $.pdialog.open("navTab.getCurrentPanel()/other/st-err-dialog.html", 'st_err_dialog', rowData.msg, {"width": 800, "height": 420});
+        $.pdialog.open("page/other/st-err-dialog.html", 'st_err_dialog', rowData.msg, {"width": 800, "height": 420});
     }
 });
 

@@ -70,5 +70,5 @@ $("#search-detail", navTab.getCurrentPanel()).click(function() {
         return;
     }
     sessionStorage.log_err_detail = JSON.stringify({server: $("#server", navTab.getCurrentPanel()).val(),begin: begin, end: end,username_err: $("#username_err", navTab.getCurrentPanel()).val(),ip_err: $("#ip_err", navTab.getCurrentPanel()).val()});
-    $.pdialog.open("navTab.getCurrentPanel()/user/login-err-detail.html", 'login-err-detail','用户登录失败统计', {"width": 800, "height": 510});
+    $.pdialog.open("page/user/login-err-detail.html", 'login-err-detail','用户登录失败统计', {"width": 800, "height": 510});
 });

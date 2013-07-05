@@ -84,6 +84,6 @@ $("#edit", navTab.getCurrentPanel()).click(function() {
     var rowData = $(this).getRow();
     if (rowData) {
         sessionStorage.user_trake_dialog = JSON.stringify(rowData);
-        $.pdialog.open("navTab.getCurrentPanel()/user/user-trake-dialog.html", 'user-trake-dialog', rowData.ip + rowData.service_code, {"width": 800, "height": 610});
+        $.pdialog.open("page/user/user-trake-dialog.html", 'user-trake-dialog', rowData.ip + rowData.service_code, {"width": 800, "height": 610});
     }
 });

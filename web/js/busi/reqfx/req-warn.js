@@ -75,13 +75,13 @@ $("#search-all-detail", navTab.getCurrentPanel()).click(function() {
         return;
     }
     sessionStorage.err_server_all = JSON.stringify({server: $("#server", navTab.getCurrentPanel()).val(), is_timeout: $("#is_time_out", navTab.getCurrentPanel()).val(), end: end, begin: begin});
-    $.pdialog.open("navTab.getCurrentPanel()/reqfx/req-warn-all.html", 'req-warn-all', "请求异常统计", {"width": 800, "height": 510});
+    $.pdialog.open("page/reqfx/req-warn-all.html", 'req-warn-all', "请求异常统计", {"width": 800, "height": 510});
 });
 
 $("#edit", navTab.getCurrentPanel()).click(function() {
     var rowData = $(this).getRow();
     if (rowData) {
         sessionStorage.req_warn_dialog = JSON.stringify(rowData);
-        $.pdialog.open("navTab.getCurrentPanel()/reqfx/req-warn-dialog.html", 'req-warn-dialog', rowData.req_url, {"width": 800, "height": 600});
+        $.pdialog.open("page/reqfx/req-warn-dialog.html", 'req-warn-dialog', rowData.req_url, {"width": 800, "height": 600});
     }
 });

@@ -127,7 +127,7 @@ $("#search-detail", navTab.getCurrentPanel()).click(function() {
         return;
     }
     sessionStorage.err_server_detail = JSON.stringify({server: $("#server", navTab.getCurrentPanel()).val(), service_code: $("#service_code_detail", navTab.getCurrentPanel()).val(), begin: begin, end: end});
-    $.pdialog.open("navTab.getCurrentPanel()/sysserver/err-server-detail.html", 'err-server-detail', getParaValue($("#server", navTab.getCurrentPanel()).val() + ".service", $("#service_code_detail", navTab.getCurrentPanel()).val()), {"width": 800, "height": 510});
+    $.pdialog.open("page/sysserver/err-server-detail.html", 'err-server-detail', getParaValue($("#server", navTab.getCurrentPanel()).val() + ".service", $("#service_code_detail", navTab.getCurrentPanel()).val()), {"width": 800, "height": 510});
 });
 
 $("#search-all-detail", navTab.getCurrentPanel()).click(function() {
@@ -138,14 +138,14 @@ $("#search-all-detail", navTab.getCurrentPanel()).click(function() {
         return;
     }
     sessionStorage.err_server_all = JSON.stringify({begin: begin, end: end});
-    $.pdialog.open("navTab.getCurrentPanel()/sysserver/err-server-all.html", 'err-server-all', "服务异常统计", {"width": 800, "height": 510});
+    $.pdialog.open("page/sysserver/err-server-all.html", 'err-server-all', "服务异常统计", {"width": 800, "height": 510});
 });
 
 $("#edit", navTab.getCurrentPanel()).click(function() {
     var rowData = $(this).getRow();
     if (rowData) {
         sessionStorage.err_server_dialog = JSON.stringify(rowData);
-        $.pdialog.open("navTab.getCurrentPanel()/sysserver/err-server-dialog.html", 'err-server-dialog', rowData.response_desc, {"width": 800, "height": 610});
+        $.pdialog.open("page/sysserver/err-server-dialog.html", 'err-server-dialog', rowData.response_desc, {"width": 800, "height": 610});
     }
 });
 

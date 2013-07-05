@@ -25,7 +25,7 @@ $("#edit", navTab.getCurrentPanel()).click(function() {
     var rowData = $(this).getRow();
     if (rowData) {
         sessionStorage.log_ip_dialog = JSON.stringify({server:$("#server", navTab.getCurrentPanel()).val(),ip:rowData.ip});
-        $.pdialog.open("navTab.getCurrentPanel()/user/log-ip-dialog.html", 'log-ip-dialog', rowData.ip+'登录用户详情', {"width": 800, "height": 530});
+        $.pdialog.open("page/user/log-ip-dialog.html", 'log-ip-dialog', rowData.ip+'登录用户详情', {"width": 800, "height": 530});
     }
 });
 
