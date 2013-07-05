@@ -5,6 +5,8 @@
 var _is_notice = false;
 var ws = null;
 var _no_read_count = 0;     //未读通知计算器，在异常查看页面清0
+var conTimer;               //重连定时器
+
 $(function() {
     if (window.webkitNotifications) {
         if (window.webkitNotifications.checkPermission() == 1) { // 0 is PERMISSION_ALLOWED
@@ -63,11 +65,23 @@ function createSocket() {
     };
 
     ws.onclose = function(evt) {
-        notice("与服务器端的连接中断", "");
+        notice("与服务器端的连接中断", "30秒后开始重新连接。");
+        if (!conTimer) {
+            conTimer = setInterval(function() {
+                ws = null;
+                createSocket();
+            }, 30000);
+        }
     };
 
     ws.onopen = function(evt) {
         console.log("open");
+        if (conTimer) {
+            clearInterval(conTimer);
+            conTimer = null;
+            notice("与服务器重新建立连接", "");
+        }
+        _no_read_count = 0;
     };
 }
 
