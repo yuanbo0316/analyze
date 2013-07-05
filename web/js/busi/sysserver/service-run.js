@@ -80,10 +80,14 @@ $("#search-button", navTab.getCurrentPanel()).click(function() {
         var year = "";
         var day = "";
         var month = "";
-        if ((list[0].save_time).substring(0, 4) == (list[list.length - 1].save_time).substring(0, 4)) {
-            year = (list[0].save_time).substring(0, 4) + '年';
-        } else {
-            year = (list[0].save_time).substring(0, 4) + '年到' + (list[list.length - 1].save_time).substring(0, 4) + '年';
+        if (list[0]) {
+            if ((list[0].save_time).substring(0, 4) == (list[list.length - 1].save_time).substring(0, 4)) {
+                year =getParaValue($("#server", navTab.getCurrentPanel()).val() + '.service', $("#service_code_detail", navTab.getCurrentPanel()).val()) + '运行情况('+(list[0].save_time).substring(0, 4) + '年)';
+            } else {
+                year = getParaValue($("#server", navTab.getCurrentPanel()).val() + '.service', $("#service_code_detail", navTab.getCurrentPanel()).val()) + '运行情况('+(list[0].save_time).substring(0, 4) + '年到' + (list[list.length - 1].save_time).substring(0, 4) + '年)';
+            }
+        }else{
+            year =getParaValue($("#server", navTab.getCurrentPanel()).val() + '.service', $("#service_code_detail", navTab.getCurrentPanel()).val()) + '服务未运行';
         }
         series[0] = {"name": "最长运行时间", "data": []};
         series[1] = {"name": "最短运行时间", "data": []};
@@ -130,7 +134,7 @@ $("#search-button", navTab.getCurrentPanel()).click(function() {
 
         $('#service_run_time', navTab.getCurrentPanel()).highcharts({
             chart: {type: 'spline'},
-            title: {text: getParaValue($("#server", navTab.getCurrentPanel()).val() + '.service', $("#service_code_detail", navTab.getCurrentPanel()).val()) + '运行情况(' + year + ')'},
+            title: {text: year},
             xAxis: {
                 tickInterval: 8,
                 categories: categories,

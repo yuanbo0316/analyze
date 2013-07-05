@@ -7,7 +7,7 @@
         return this.each(function() {
             $(this).hide().attr("lazy-layoutH", $(this).attr("layoutH")).removeAttr("layoutH");
             var $table = $(this).clone(true), nowrapTD = $table.attr("nowrapTD");
-            $table.attr("layoutH",$table.attr("lazy-layoutH")).removeAttr("lazy-layoutH").show();
+            $table.attr("layoutH", $table.attr("lazy-layoutH")).removeAttr("lazy-layoutH").show();
             $(this).after($table);
             var tlength = $table.width();
             var aStyles = [];
@@ -51,7 +51,13 @@
 
             ths.each(function(i) {
                 var $th = $(this), style = aStyles[i];
-                $th.addClass(style[1]).hoverClass("hover").removeAttr("align").removeAttr("width").width(style[0]);
+                if ($th.attr("width")) {
+                    console.log($th.attr("width")); 
+                    aStyles[i][0] = $th.attr("width");
+                    $th.addClass(style[1]).hoverClass("hover").removeAttr("align").removeAttr("width").width(aStyles[i][0]);
+                } else {
+                     $th.addClass(style[1]).hoverClass("hover").removeAttr("align").removeAttr("width").width(style[0]);
+                }
             }).filter("[orderField]").orderBy({
                 targetType: $table.attr("targetType"),
                 rel: $table.attr("rel"),
@@ -90,7 +96,7 @@
                 });
             });
 
-            $(">td", ftr).each(function(i) {
+            $(">td", ftr).each(function(i) {                
                 if (i < aStyles.length)
                     $(this).width(aStyles[i][0]);
             });

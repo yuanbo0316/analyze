@@ -50,7 +50,7 @@ $("#search-today", navTab.getCurrentPanel()).click(function() {
             list[i].server = getParaValue("st.server", list[i].server);
         }
     });
-}).trigger("click");
+});
 
 $("#edit", navTab.getCurrentPanel()).click(function() {
     var rowData = $(this).getRow();
