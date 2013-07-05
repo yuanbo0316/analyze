@@ -105,6 +105,7 @@ $(document).ready(function() {
             } else {
                 _paramets[key].push(list[i]);
             }
+         
         }
     };
     $.ajax(o);
@@ -195,11 +196,21 @@ function getParaList(col) {
  */
 function initParaSelect(col, obj) {
     if (obj == null || obj.length < 1)
-        return;
+        return;   
     var arr = getParaList(col);
     if (arr)
         for (var i = 0; i < arr.length; i++) {
             obj.append($("<option/>").attr("value", arr[i].col_value).html(arr[i].value_desc));
+        }
+}
+
+function initServiceParaSelect(col, obj) {
+    if (obj == null || obj.length < 1)
+        return;   
+    var arr = getParaList(col);
+    if (arr)
+        for (var i = 0; i < arr.length; i++) {
+            obj.append($("<option/>").attr("value", arr[i].col_value).html(arr[i].col_value+"("+arr[i].value_desc+")"));
         }
 }
 
