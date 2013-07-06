@@ -8,6 +8,7 @@ import com.soa.service.busi.impl.BusiService;
 import com.soa.service.impl.UtilService;
 import com.lianzt.util.StringUtil;
 import com.soa.util.SystemUtil;
+import com.soa.websocket.ErrorMsgServlet;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -173,6 +174,7 @@ public class UtilServiceImpl extends BaseService implements UtilService {
             errMsg = ge.getErrorMsg();
         }
         log.error("保存的异常：", e);
+        ErrorMsgServlet.msgToAll(e.getMessage());
         //记录错误日志
         try {
             if (getJdbcTemplate().update(SAVE_ERROR, SystemUtil.getSerialNum(), errCode, errMsg, StringUtil.getExceptionStack(e)) > 0) {
