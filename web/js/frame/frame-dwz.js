@@ -156,6 +156,7 @@ $(document).ready(function() {
             for (var i in json) {
                 o.put(i, json[i]);
             }
+            o.timeout = 30000;
             o.isPadBack = false;
             o.sus = function(data) {
                 if ($.isFunction(callback)) {
