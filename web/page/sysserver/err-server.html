@@ -16,15 +16,7 @@ and open the template in the editor.
                         结束时间：<input type="text" class="date required" id="end" readonly="readonly"/>
                         <select  id="end-hour"  style="display: none;" ></select><select id="end-minute" style="display: none;"></select><select id="end-second" style="display: none;"></select>
                     </td>
-              
-                       <td>
-                        服务码：
-                    </td>
-                    <td >
-                        <select style="width:250px;" id="service_code_detail">
-                            <option value="" selected="selected">全部</option>
-                        </select>
-                    </td>
+
                     <td width="50">
                         监控系统：
                     </td>
@@ -33,12 +25,20 @@ and open the template in the editor.
                             <option value="" selected="selected">全部</option>
                         </select>
                     </td>
-                 
+
+                    <td>
+                        服务码：
+                    </td>
+                    <td>
+                        <select style="width:250px;" id="service_code_detail">
+                            <option value="" selected="selected">全部</option>
+                        </select>
+                    </td>
                 </tr>
             </table>
             <div class="subBar">
-                <ul>
-                     <li><div class="buttonActive"><div class="buttonContent"><button type="button" id="search-detail">显示图表</button></div></div></li>
+                <ul><li><div class="buttonActive"><div class="buttonContent"><button type="button" id="search-all-detail">异常服务统计</button></div></div></li>
+                    <li><div class="buttonActive"><div class="buttonContent"><button type="button" id="search-detail">服务分析</button></div></div></li>
                     <li><div class="buttonActive"><div class="buttonContent"><button type="button" id="search-button">查询</button></div></div></li>
                     <li><div class="buttonActive"><div class="buttonContent"><button type="button" id="search-today">查询今天</button></div></div></li>
                 </ul>

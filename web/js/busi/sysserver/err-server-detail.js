@@ -3,6 +3,7 @@
  * and open the template in the editor.
  */
 var jsonStr = sessionStorage.err_server_detail;
+sessionStorage.removeItem("err_server_detail");
 var data = JSON.parse(jsonStr);
 
 var o = new AjaxOptions();
@@ -12,49 +13,42 @@ o.put("begin", data["begin"] ? data["begin"] : getNowDate());
 o.put("end", data["end"] ? data["end"] : getNowDateTime());
 o.put("service_code", "S34202");
 o.sus = function(sus_data) {
+    var result
+    var result_data = sus_data.result;
+    var pie = [];
     var categories = [];
-    var series = [];
-    var time = sus_data.time;
-    for(var i=0;i<time.length;i++){        
-        categories[i] = time[i].save_time;
+    var series_data = [];
+    for (var i = 0; i < result_data.length; i++) {
+        pie[i] = [result_data[i].response_desc+"("+result_data[i].response_code+")", parseInt(result_data[i].sum)];
     }
-    var result = sus_data.result;
-    for (var i = 0; i < result.length; i++) {
-        series[i] = {
-            name: result[i].name,
-            data: result[i].counts
-        }
-    }
-    var result = {chart: {
-            type: 'column'
+    result = {chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false
         },
         title: {
-            text:getParaValue(data["server"]+".service",data["service_code"])
-        },
-        xAxis: {
-            categories: categories
-        },
-        yAxis: {
-            min: 0,
-            title: {
-                text: '错误次数（次）'
-            }
+            text: getParaValue(data["server"] + ".service", data["service_code"]) + "(" + data["begin"] + "到" + data["end"] + ")"
         },
         tooltip: {
-            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                    '<td style="padding:0"><b>{point.y} 次</b></td></tr>',
-            footerFormat: '</table>',
-            shared: true,
-            useHTML: true
+            pointFormat: '{series.name}: <b>{point.y}</b>',
+            percentageDecimals: 1
         },
         plotOptions: {
-            column: {
-                pointPadding: 0.2,
-                borderWidth: 0
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: false
+                },
+                showInLegend: true
             }
         },
-        series: series};
-          $("#server_detail").highcharts(result);
+        series: [{
+                type: 'pie',
+                name: '异常次数',
+                data: pie
+            }]};
+
+    $("#server_detail").highcharts(result);
 };
 $.ajax(o);

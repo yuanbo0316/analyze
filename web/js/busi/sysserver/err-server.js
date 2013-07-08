@@ -92,8 +92,20 @@ $("#search-detail", page).click(function() {
         return;
     }
     sessionStorage.err_server_detail = JSON.stringify({server: $("#server", page).val(), service_code: $("#service_code_detail", page).val(), begin: begin, end: end});
-    $.pdialog.open("page/sysserver/err-server-detail.html", 'err-server-detail', getParaValue($("#server", page).val() + ".service", $("#service_code_detail", page).val()), {"width": 800, "height": 550});
+    $.pdialog.open("page/sysserver/err-server-detail.html", 'err-server-detail', getParaValue($("#server", page).val() + ".service", $("#service_code_detail", page).val()), {"width": 800, "height": 510});
 });
+
+$("#search-all-detail", page).click(function() {
+    var begin = $("#begin", page).val();
+    var end = $("#end", page).val() ;
+    if(begin==""|| end==""){
+         alertMsg.confirm("请设置时间");
+        return;
+    }
+    sessionStorage.err_server_all = JSON.stringify({begin: begin, end: end});
+    $.pdialog.open("page/sysserver/err-server-all.html", 'err-server-all', "服务异常统计", {"width": 800, "height": 510});
+});
+
 $("#edit", page).click(function() {
     var rowData = $(this).getRow();
     if (rowData) {
