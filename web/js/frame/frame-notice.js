@@ -52,7 +52,8 @@ $(function() {
 function createSocket() {
     if (ws)
         return;
-    ws = new WebSocket(location.href.replace("http://", 'ws://').replace(/\/analyze\/.*/, '/analyze/ErrorMsgServlet'));
+//    ws = new WebSocket(location.href.replace("http://", 'ws://').replace(/\/analyze\/.*/, '/analyze/ErrorMsgServlet'));
+    ws = new WebSocket('ws://125.46.83.201/analyze/ErrorMsgServlet');
     ws.onmessage = function(evt) {
         console.log(evt.data);
         notice("服务器端通知(单击可查看)", evt.data, function() {

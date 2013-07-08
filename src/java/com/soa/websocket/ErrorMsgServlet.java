@@ -4,6 +4,8 @@
  */
 package com.soa.websocket;
 
+import com.lianzt.util.HttpConnect;
+import com.soa.util.SystemUtil;
 import java.io.IOException;
 import java.nio.CharBuffer;
 import java.util.HashSet;
@@ -38,12 +40,31 @@ public class ErrorMsgServlet extends WebSocketServlet {
      * @param msg
      */
     public static void msgToAll(String msg) {
-        for (MessageInbound mi : sockets) {
-            try {
-                mi.getWsOutbound().writeTextMessage(CharBuffer.wrap(msg));
-            } catch (IOException e) {
-                log.warn("发送 websocket 通知时出现异常：", e);
+        HttpConnect hc = null;
+        try {
+            hc = new HttpConnect(SystemUtil.getSysConfig("node_url"));
+            hc.addParameter("msg", msg);
+            hc.sendMsg();
+            log.info("在线人数：{}", hc.receMsg().trim());
+        } catch (IOException e) {
+            log.error("发送实时消息异常：", e);
+        } finally {
+            if (hc != null) {
+                hc.closeStream();
             }
         }
     }
+//    public synchronized static void msgToAll(String msg) {
+//        try {
+//            for (MessageInbound mi : sockets) {
+//                try {
+//                    mi.getWsOutbound().writeTextMessage(CharBuffer.wrap(msg));
+//                } catch (IOException e) {
+//                    log.warn("发送 websocket 通知时出现异常：", e);
+//                }
+//            }
+//        } catch (Exception e) {
+//            log.error("set error : ", e);
+//        }
+//    }
 }

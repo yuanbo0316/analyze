@@ -32,7 +32,9 @@ public class ErrorMsgInbound extends MessageInbound {
     @Override
     protected void onOpen(WsOutbound outbound) {
         super.onOpen(outbound);
-        ErrorMsgServlet.sockets.add(this);
+        synchronized (ErrorMsgServlet.sockets) {
+            ErrorMsgServlet.sockets.add(this);
+        }
         log.debug("客户端open");
     }
 
@@ -40,6 +42,8 @@ public class ErrorMsgInbound extends MessageInbound {
     protected void onClose(int status) {
         super.onClose(status);
         log.debug("客户端 close");
-        ErrorMsgServlet.sockets.remove(this);
+        synchronized (ErrorMsgServlet.sockets) {
+            ErrorMsgServlet.sockets.remove(this);
+        }
     }
 }
