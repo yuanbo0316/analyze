@@ -105,7 +105,7 @@ $(document).ready(function() {
             } else {
                 _paramets[key].push(list[i]);
             }
-         
+
         }
     };
     $.ajax(o);
@@ -196,7 +196,7 @@ function getParaList(col) {
  */
 function initParaSelect(col, obj) {
     if (obj == null || obj.length < 1)
-        return;   
+        return;
     var arr = getParaList(col);
     if (arr)
         for (var i = 0; i < arr.length; i++) {
@@ -206,11 +206,11 @@ function initParaSelect(col, obj) {
 
 function initServiceParaSelect(col, obj) {
     if (obj == null || obj.length < 1)
-        return;   
+        return;
     var arr = getParaList(col);
     if (arr)
         for (var i = 0; i < arr.length; i++) {
-            obj.append($("<option/>").attr("value", arr[i].col_value).html(arr[i].col_value+"("+arr[i].value_desc+")"));
+            obj.append($("<option/>").attr("value", arr[i].col_value).html(arr[i].col_value + "(" + arr[i].value_desc + ")"));
         }
 }
 
@@ -496,9 +496,7 @@ AjaxOptions = function(formId) {
             case "timeout":
                 console.error("请求超时，请稍候检查操作是否成功！");
                 error_msg = "请求超时，请稍候检查操作是否成功！";
-                if (this.isAlert) {
-                    alertMsg.error("请求超时，请稍候检查操作是否成功！");
-                }
+                alertMsg.error("请求超时，请稍候检查操作是否成功！");
                 break;
             case "error":
             case "notmodified":
@@ -512,9 +510,7 @@ AjaxOptions = function(formId) {
                         error_msg = _error_info[request.status];
                         if (!error_msg) {
                             error_msg = "错误代码未定义！";
-                            if (this.isAlert) {
-                                console.error("错误代码未定义！");
-                            }
+                            console.error("错误代码未定义！");
                         }
                     }
                 } catch (e) {
