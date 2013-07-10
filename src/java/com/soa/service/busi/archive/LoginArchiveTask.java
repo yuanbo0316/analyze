@@ -20,12 +20,14 @@ import org.springframework.transaction.annotation.Transactional;
  * 说明：每次执行对前一天的日志进行归档，整理成用户的登录历史和系统用户登录人次表，然后删除30天之前的数据；
  * （用户登录历史表：每个用户从一类终端登录记录一条数据，记录最后登录时间和登录总次数）
  * （用户登录人次表：每个监控子系统每天记录一条数据，记录用户数和登录次数）
+ * 参数：archive_day（可选）
  * @author lianzt
  */
 @Service
-public class LoginArchiveTask extends BaseService{
+public class LoginArchiveTask extends BaseService {
 
     private final int DEL_DAY = -30;     //删除1天前的日志
+
     @Override
     public String[] keys() {
         return null;
@@ -34,7 +36,10 @@ public class LoginArchiveTask extends BaseService{
     @Override
     @Transactional
     public void execute(AbstractCommonData in, AbstractCommonData inHead, AbstractCommonData out, AbstractCommonData outHead) {
-        Date time = new Date();
+        Date time = in.getDateValue("archive_day");
+        if (time == null) {
+            time = new Date();
+        }
         time = DateUtil.setHour(time, 0);
         time = DateUtil.setMinute(time, 0);
         time = DateUtil.setSecond(time, 0);
@@ -50,17 +55,17 @@ public class LoginArchiveTask extends BaseService{
         //update log_login_his set last_login=?, times=times+? where server=? and username=? and from_node=?
         List<Object[]> updateArgs = new LinkedList<Object[]>();
         Object[] argsTemp = null;
-        if(list != null && !list.isEmpty()){
-            for(AbstractCommonData acd : list){
+        if (list != null && !list.isEmpty()) {
+            for (AbstractCommonData acd : list) {
                 argsTemp = new Object[5];
-                if(StringUtil.isNull(acd.getStringValue("u"))){     //左外连接，如果 b.username u 项为空，表示为新数据
+                if (StringUtil.isNull(acd.getStringValue("u"))) {     //左外连接，如果 b.username u 项为空，表示为新数据
                     argsTemp[0] = acd.getStringValue("server");
                     argsTemp[1] = acd.getStringValue("username");
                     argsTemp[2] = acd.getStringValue("from_node");
                     argsTemp[3] = acd.getDateValue("last_login");
                     argsTemp[4] = acd.getIntValue("times");
                     insertArgs.add(argsTemp);
-                }else{
+                } else {
                     argsTemp[0] = acd.getDateValue("last_login");
                     argsTemp[1] = acd.getIntValue("times");
                     argsTemp[2] = acd.getStringValue("server");
