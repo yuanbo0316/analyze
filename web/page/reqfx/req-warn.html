@@ -8,32 +8,23 @@ and open the template in the editor.
         <div class="searchBar">
             <table class="searchContent" >
                 <tr>
-                    <td width="50">
-                        监控系统：
-                    </td>
-                    <td>
-                        <select id="server" style="width: 170px;" >
-                            <option value="" selected="selected">全部</option>
-                        </select>
-                    </td>
-
-                    <!--               <td>
-                                       请求页面：
-                                   </td>
-                                   <td>
-                                       <select style="width:250px;" id="req_url">
-                                           <option value="" selected="selected">全部</option>
-                                       </select>
-                                   </td>-->
                     <td>
                         选择超时：
                     </td>
                     <td>
-                        <select style="width:100px;" id="is_time_out">
+                        <select style="width:100px;" class="combox" id="is_time_out">
                             <option value="1" selected="selected">超时请求</option>
                             <option value="0" selected="selected">异常请求</option>
                         </select>
                     </td> 
+                    <td width="50">
+                        监控系统：
+                    </td>
+                    <td>
+                        <select id="server" class="combox" style="width: 170px;" >
+                            <option value="" selected="selected">全部</option>
+                        </select>
+                    </td>
                     <td>
                         开始时间：<input type="text" class="date required" id="begin" readonly="readonly" />
                         <select id="begin-hour"  style="display: none;" ></select><select id="begin-minute" style="display: none;"></select><select id="begin-second" style="display: none;"></select>
@@ -68,7 +59,7 @@ and open the template in the editor.
             <li><a class="edit" id="edit" target-table="req_warn_list"><span>查看详细</span></a></li>
         </ul>
     </div>
-    <table class="table" width="100%" layoutH="154" id="req_warn_list">
+    <table class="table" width="100%" layoutH="179" id="req_warn_list">
         <thead>
             <tr>
                 <th data-key="req_time">时间</th>

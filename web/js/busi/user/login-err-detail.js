@@ -2,17 +2,18 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-var jsonStr = sessionStorage.err_server_detail;
-sessionStorage.removeItem("err_server_detail");
+var jsonStr = sessionStorage.log_err_detail;
+sessionStorage.removeItem("log_err_detail");
 var data = JSON.parse(jsonStr);
 
 var o = new AjaxOptions();
 o.timeout=30000;
 o.put("server", data["server"]);
-o.put("service_code_detail", data["service_code"]);
-o.put("begin", data["begin"] ? data["begin"] : getNowDate());
-o.put("end", data["end"] ? data["end"] : getNowDateTime());
-o.put("service_code", "S34202");
+o.put("begin", data["begin"]);
+o.put("end", data["end"]);
+o.put("service_code", "S34110");
+o.put("username_err", data["username_err"]);
+o.put("ip_addr", data["ip_err"]);
 o.sus = function(sus_data) {
     var result
     var result_data = sus_data.result;
@@ -20,7 +21,7 @@ o.sus = function(sus_data) {
     var categories = [];
     var series_data = [];
     for (var i = 0; i < result_data.length; i++) {
-        pie[i] = [result_data[i].response_desc+"("+result_data[i].response_code+")", parseInt(result_data[i].sum)];
+        pie[i] = [result_data[i].response_desc + "(" + result_data[i].response_code + ")", parseInt(result_data[i].sum)];
     }
     result = {chart: {
             plotBackgroundColor: null,
@@ -28,7 +29,10 @@ o.sus = function(sus_data) {
             plotShadow: false
         },
         title: {
-            text: getParaValue(data["server"] + ".service", data["service_code"]) + "(" + data["begin"] + "到" + data["end"] + ")"
+            text: "用户" + data["username_err"] + "登录失败统计(" + data["begin"] + "到" + data["end"] + ")"
+        },
+        subtitle: {
+            text: data["ip_err"]
         },
         tooltip: {
             pointFormat: '{series.name}: <b>{point.y}</b>',

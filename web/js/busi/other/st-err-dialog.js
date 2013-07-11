@@ -8,4 +8,3 @@ sessionStorage.removeItem("st_err_detail");
 if (jsonStr) {
     padBackData(JSON.parse(jsonStr), "", true);
 }
-alert(JSON.parse(jsonStr).msg);

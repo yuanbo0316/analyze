@@ -27,18 +27,22 @@ and open the template in the editor.
                     </td>
 
                     <td>
-                        服务码：
+                        用户名：
                     </td>
                     <td>
-                        <select style="width:250px;" id="service_code_detail">
-                            <option value="" selected="selected">全部</option>
-                        </select>
+                        <input id="username_err" type="text"/>
+                    </td>
+                       <td>
+                        IP地址：
+                    </td>
+                    <td>
+                        <input id="ip_err" type="text"/>
                     </td>
                 </tr>
             </table>
             <div class="subBar">
-                <ul><li><div class="buttonActive"><div class="buttonContent"><button type="button" id="search-all-detail">异常服务统计（柱状图）</button></div></div></li>
-                    <li><div class="buttonActive"><div class="buttonContent"><button type="button" id="search-detail">服务异常分析（饼状图）</button></div></div></li>
+                <ul>
+                    <li><div class="buttonActive"><div class="buttonContent"><button type="button" id="search-detail">登陆失败统计</button></div></div></li>
                     <li><div class="buttonActive"><div class="buttonContent"><button type="button" id="search-button">查询</button></div></div></li>
                     <li><div class="buttonActive"><div class="buttonContent"><button type="button" id="search-today">查询今天</button></div></div></li>
                 </ul>
@@ -48,19 +52,15 @@ and open the template in the editor.
 </div>
 
 <div class="pageContent">
-    <div class="panelBar">
-        <ul class="toolBar">
-            <li><a class="edit" id="edit" target-table="error_list"><span>查看详细</span></a></li>
-        </ul>
-    </div>
-    <table class="table" width="100%" layoutH="154" id="error_list">
+    <table class="table" width="100%" layoutH="154" id="error_login_list">
         <thead>
             <tr>
                 <th data-key="exec_time">时间</th>
                 <th data-key="server">系统</th>
-                <th data-key="service_code">服务码</th>
                 <th data-key="username">用户名</th>
                 <th data-key="ip">IP地址</th>
+                <th data-key="from_node">终端类型</th>
+                <th data-key="opt">登录操作</th>
                 <th data-key="response_code">异常代码</th>
                 <th data-key="response_desc">异常信息</th>
             </tr>

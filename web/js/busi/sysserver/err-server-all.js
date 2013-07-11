@@ -2,6 +2,7 @@ var jsonStr = sessionStorage.err_server_all;
 sessionStorage.removeItem("err_server_all");
 var data = JSON.parse(jsonStr);
 var o = new AjaxOptions();
+o.timeout = 30000;
 o.put("begin", data["begin"] ? data["begin"] : getNowDate());
 o.put("end", data["end"] ? data["end"] : getNowDateTime());
 o.put("service_code", "S34203");
@@ -10,9 +11,13 @@ o.sus = function(sus_data) {
     var pie = [];
     var categories = [];
     var series_data = [];
+    var k = 0;
     for (var i = 0; i < result_data.length; i++) {
-        series_data[i] = parseInt(result_data[i].sum);
-        categories[i] = getParaValue(result_data[i].server + ".service", result_data[i].service_code) + "(" + result_data[i].service_code + ")";
+        if (parseInt(result_data[i].sum) > 100) {
+            series_data[k] = parseInt(result_data[i].sum);
+            categories[k] = getParaValue(result_data[i].server + ".service", result_data[i].service_code) + "(" + result_data[i].service_code + ")";
+            k++;
+        }
     }
     var result = {chart: {
             type: 'column',
@@ -20,6 +25,9 @@ o.sus = function(sus_data) {
         },
         title: {
             text: "异常服务(" + data["begin"] + "到" + data["end"] + ")"
+        },
+        subtitle: {
+            text: '只显示执行次数大于100次的服务'
         },
         xAxis: {
             categories: categories,
@@ -65,5 +73,6 @@ o.sus = function(sus_data) {
                 }
             }]};
     $("#server_all_detail").highcharts(result);
-};
+}
+;
 $.ajax(o);

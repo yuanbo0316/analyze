@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.soa.service.reqfx;
+package com.soa.service.busi.reqfx;
 
 import com.lianzt.commondata.AbstractCommonData;
 import com.soa.service.BaseService;

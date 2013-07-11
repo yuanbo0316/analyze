@@ -2,17 +2,14 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-var jsonStr = sessionStorage.err_server_detail;
-sessionStorage.removeItem("err_server_detail");
+var jsonStr = sessionStorage.service_run_time;
+sessionStorage.removeItem("service_run_time");
 var data = JSON.parse(jsonStr);
 
 var o = new AjaxOptions();
-o.timeout=30000;
 o.put("server", data["server"]);
 o.put("service_code_detail", data["service_code"]);
-o.put("begin", data["begin"] ? data["begin"] : getNowDate());
-o.put("end", data["end"] ? data["end"] : getNowDateTime());
-o.put("service_code", "S34202");
+o.put("service_code", "S34205");
 o.sus = function(sus_data) {
     var result
     var result_data = sus_data.result;
@@ -50,6 +47,6 @@ o.sus = function(sus_data) {
                 data: pie
             }]};
 
-    $("#server_detail").highcharts(result);
+    $("#service_run_detail").highcharts(result);
 };
 $.ajax(o);

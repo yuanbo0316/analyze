@@ -26,12 +26,14 @@ public class GetHomeDetail extends BaseService{
     @Override
     public void execute(AbstractCommonData in, AbstractCommonData inHead, AbstractCommonData out, AbstractCommonData outHead) {
        List<AbstractCommonData> all_list = queryList("get_home_all_detail");
-        Date now = new Date();
-        Date today = new Date();
-        today = DateUtil.setHour(today, 0);
-        today = DateUtil.setMinute(today, 0);
-        today = DateUtil.setSecond(today, 0);
-       Object[] args = new Object[]{};
+        Date end = new Date();
+        Date begin = new Date();
+        begin = DateUtil.setHour(begin, 0);
+        begin = DateUtil.setMinute(begin, 0);
+        begin = DateUtil.setSecond(begin, 0);
+        List<AbstractCommonData> today_list = queryList("get_home_detail", new Object[]{end,begin});
+        out.putArrayValue("today", today_list);
+        out.putArrayValue("all", all_list);
     }
     
 }
