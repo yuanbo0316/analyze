@@ -1,0 +1,55 @@
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<div class="pageHeader">
+    <form id="search-form">
+        <div class="searchBar">
+            <p  style="text-align:center;"><span style=" font-size: 20px;font-weight: bold;">近30天登陆IP情况</span></p>
+             <table class="searchContent" style="margin-top: 10px">
+               
+                <tr>  
+                    <td width="300">
+
+                    </td>
+                    <td width="50">
+                        监控系统：
+                    </td>
+                    <td>
+                        <select id="server" style="width: 170px;" class="combox" >
+                            <option value="" selected="selected">全部</option>
+                        </select>
+                    </td>
+                    <td>
+                        用户名：
+                    </td>
+                    <td>
+                        <input id="username_ip" type="text"/>
+                    </td>
+                    <td> <ul><li><div class="buttonActive"><div class="buttonContent"><button type="button" id="search-button">查询</button></div></div></li>
+                        </ul></td>
+                </tr>
+            </table>
+        </div>
+    </form>
+</div>
+
+<div class="pageContent">
+    <div class="panelBar">
+        <ul class="toolBar">
+            <li><a class="edit" id="edit" target-table="username_count_list"><span>查看详细</span></a></li>
+        </ul>
+    </div>
+    <table class="table" width="100%" layoutH="154" id="username_count_list">
+        <thead>
+            <tr>
+                <th data-key="ip">IP地址</th>
+                <th data-key="server">系统</th>
+                <th data-key="sum">用户名个数</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>

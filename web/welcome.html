@@ -61,6 +61,7 @@ and open the template in the editor.
         <script type="text/javascript" src="js/frame/m.js"></script>
         <script type="text/javascript">
             $(function() {
+
                 $("#login-user").html(sessionStorage.username);
                 DWZ.init("dwz.frag.xml", {
                     loginUrl: "page/login_dialog.html", loginTitle: "登录", // 弹出登录对话框
@@ -72,6 +73,12 @@ and open the template in the editor.
                         initEnv();
                         $("#themeList").theme({themeBase: "themes"}); // themeBase 相对于index页面的主题base路径
                     }
+                });
+
+                $("#home_btn").click(function() {
+                    var ajaxbg = $("#background,#progressBar");
+                    ajaxbg.show();
+                    abde();
                 });
                 $("#welcome_logout").click(function() {
                     var o = new AjaxOptions();
@@ -85,6 +92,7 @@ and open the template in the editor.
         </script>
         <script src="js/frame/frame-dwz.js" type="text/javascript"></script>
         <script src="js/frame/frame-notice.js" type="text/javascript"></script>
+        <script src="js/busi/welcome.js" type="text/javascript"></script>
     </head>
 
     <body scroll="no">
@@ -133,10 +141,10 @@ and open the template in the editor.
                                     </ul>
                                 </li>
                                 <!--  -->
-                                <li><a href="page/no_page.html" target="navTab" rel="main">用户登录情况</a></li>
-                                <li><a href="page/no_page.html" target="navTab" rel="main">登录人次分析</a></li>
-                                <li><a href="page/no_page.html" target="navTab" rel="main">登录IP分析</a></li>
-                                <li><a href="page/no_page.html" target="navTab" rel="main">登录失败统计</a></li>
+                                <li><a href="page/user/login-user-his.html" target="navTab" rel="login-user-his.">用户登录历史</a></li>
+                                <li><a href="page/user/login-user-detail.html" target="navTab" rel="login-user-detail">登录人次分析</a></li>
+                                <li><a href="page/user/login-count-byip.html" target="navTab" rel="login-count-byip">登录IP分析</a></li>
+                                <li><a href="page/user/login-err.html" target="navTab" rel="login-err">登录失败统计</a></li>
                                 <li><a href="page/no_page.html" target="navTab" rel="main">用户操作追踪</a></li>
 
                             </ul>
@@ -154,8 +162,8 @@ and open the template in the editor.
                                         <li><a href="page/no_page.html" target="navTab" rel="main">交通安全协会</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="page/no_page.html" target="navTab" rel="main">服务执行时间图表</a></li>
-                                <li><a href="page/sysserver/err-server.html" target="navTab" rel="main">异常服务统计</a></li>
+                                <li><a href="page/sysserver/service-run.html" target="navTab" rel="main">服务执行时间图表</a></li>
+                                <li><a href="page/sysserver/err-server.html" target="navTab" rel="err-server">异常服务统计</a></li>
                             </ul>
                         </div>
                         <div class="accordionHeader">
@@ -163,7 +171,7 @@ and open the template in the editor.
                         </div>
                         <div class="accordionContent">
                             <ul class="tree treeFolder">
-                                <li><a href="page/reqfx/req-warn.html" target="navTab" rel="main">异常请求统计</a></li>
+                                <li><a href="page/reqfx/req-warn.html" target="navTab" rel="req-warn">异常请求统计</a></li>
                             </ul>
                         </div>
                         <div class="accordionHeader">
@@ -195,7 +203,7 @@ and open the template in the editor.
                     <div class="tabsPageHeader">
                         <div class="tabsPageHeaderContent"><!-- 显示左右控制时添加 class="tabsPageHeaderMargin" -->
                             <ul class="navTab-tab">
-                                <li tabid="main1" class="main"><a href="javascript:;"><span><span class="home_icon">主页</span></span></a></li>
+                                <li tabid="main1" class="main"><a href="javascript:;"><span><span  class="home_icon">主页</span></span></a></li>
                             </ul>
                         </div>
                         <div class="tabsLeft">left</div><!-- 禁用只需要添加一个样式 class="tabsLeft tabsLeftDisabled" -->
@@ -207,11 +215,17 @@ and open the template in the editor.
                     </ul>
                     <div class="navTab-panel tabsPageContent layoutBox">
                         <div class="page unitBox">
-                            <div class="accountInfo">
+                            <div class="accountInfo" >
                                 <p><span>登录成功</span></p>
+                                <div class="subBar">
+                                    <ul style="float: right">
+                                        <li><div class="buttonActive"><div class="buttonContent"><button type="button" id="home_btn">刷新数据</button></div></div></li>
+                                    </ul>
+                                </div>
                             </div>
-                            <div class="pageFormContent" layoutH="80" style="margin-right:230px">
-
+                            <div class="pageFormContent" layoutH="80" >
+                                <div id="all-detail" style="width: 500px; height: 266px; margin: 0 auto;margin-top: 50px;float: left;"></div>
+                                <div id="today-detail" style="width: 500px; height: 266px;margin-left: 50px; margin: 0 auto;margin-top: 50px;float: left;"></div>
                             </div>
                         </div>
                     </div>

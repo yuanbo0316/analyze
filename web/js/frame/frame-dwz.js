@@ -89,6 +89,7 @@ function getTopWindows() {
  * 在form中点击回车键是默认的提交事件
  */
 $(document).ready(function() {
+
     var o = new AjaxOptions();
     o.put("service_code", "S10002");
     o.isPadBack = false;
@@ -98,6 +99,7 @@ $(document).ready(function() {
     };
     o.sus = function(data) {
         var list = data.st_para;
+
         for (var i = 0; i < list.length; i++) {
             var key = list[i].table_name + "." + list[i].col_name;
             if (!_paramets[key]) {
@@ -107,6 +109,7 @@ $(document).ready(function() {
             }
 
         }
+        $("#home_btn").click();
     };
     $.ajax(o);
 
@@ -139,7 +142,7 @@ $(document).ready(function() {
                 console.err("分页对象不为table");
                 return;
             }
-            json.page_size = json.page_size ? json.page_size : 50;
+            json.page_size = json.page_size ? json.page_size : 200;
             var table = $(this);
             table.data("_json", json).data("_callback", callback);      //把json数据和回调函数保存在表格中
             var panelBar = table.find("~ div.panelBar");
@@ -165,7 +168,7 @@ $(document).ready(function() {
                     panelBar.prepend(pages);
                     pageNav.pagination({
                         totalCount: data.count, //总页数
-                        numPerPage: json.page_size, //每页记录数
+                        numPerPage: json.page_size ? json.page_size : 200, //每页记录数
                         pageNumShown: 10, //显示的页码数
                         currentPage: data.page      //当前页数
                     });
@@ -212,6 +215,17 @@ function initServiceParaSelect(col, obj) {
     if (arr)
         for (var i = 0; i < arr.length; i++) {
             obj.append($("<option/>").attr("value", arr[i].col_value).html(arr[i].col_value + "(" + arr[i].value_desc + ")"));
+        }
+}
+
+function initServiceParaUl(arr, obj) {
+    if (obj == null || obj.length < 1)
+        return;
+    if (arr)
+        for (var i = 0; i < arr.length; i++) {
+            if (arr[i].username != "") {
+                obj.append($("<option/>").attr("value", arr[i].username).html(arr[i].username));
+            }
         }
 }
 

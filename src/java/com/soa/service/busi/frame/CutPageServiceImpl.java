@@ -63,6 +63,7 @@ public class CutPageServiceImpl extends BaseService {
         String indexCol = in.getStringValue("index_col");
         //构造分页查询工具
         CutPageMysql cp = new CutPageMysql(getSql(in.getStringValue("sql")), args);
+        cp.setPageSize(pageSize);
         //开始分页查询
         Date begin = new Date();
         cp = cp.getResult(page, getJdbcTemplate(), rowMapper, indexCol);

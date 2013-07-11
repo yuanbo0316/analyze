@@ -1,0 +1,69 @@
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<div class="pageHeader">
+    <form id="search-form">
+        <div class="searchBar">
+            <table class="searchContent" >
+                <tr>         
+                    <td width="200">
+
+                    </td>
+                    <td width="50">
+                        系统：
+                    </td>
+                    <td>
+                        <select id="server" style="width: 170px;" class="combox" >
+                            <option value="" selected="selected">全部</option>
+                        </select>
+                    </td>
+
+                    <td>
+                        终端类型：
+                    </td>
+                    <td>
+                        <select style="width:250px;" id="from_node" class="combox">
+                            <option value="" selected="selected">全部</option>
+                            <option value="2" >PC浏览器</option>
+                            <option value="4" >app.js客户端</option>
+                            <option value="5" >Anroid客户端</option>
+                        </select>
+                    </td>
+                    <td>
+                        用户名：
+                    </td>
+                    <td>
+                        <input id="username_his" type="text"/>
+                    </td>
+                    <td>
+                        <ul><li><div class="buttonActive"><div class="buttonContent"><button type="button" id="search-button">查询</button></div></div></li>
+                        </ul>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </form>
+</div>
+
+<div class="pageContent">
+    <div class="panelBar">
+        <ul class="toolBar">
+            <li><a class="edit" id="edit" target-table="login_his_list"><span>查看详细</span></a></li>
+        </ul>
+    </div>
+    <table class="table" width="100%" layoutH="154" id="login_his_list">
+        <thead>
+            <tr>
+                <th data-key="last_login">最后登录时间</th>
+                <th data-key="server">系统</th>
+                <th data-key="username">用户名</th>
+                <th data-key="from_node">终端类型</th>
+                <th data-key="times">登陆次数</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
