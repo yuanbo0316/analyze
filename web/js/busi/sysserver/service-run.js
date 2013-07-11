@@ -123,7 +123,8 @@ $("#search-button", page).click(function() {
                     marker: {
                         radius: 4,
                         lineColor: '#666666',
-                        lineWidth: 1
+                        lineWidth: 1,
+                        enabled: false
                     }
                 }
             },
