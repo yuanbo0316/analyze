@@ -23,10 +23,18 @@ $("#search-button", page).click(function() {
 
 });
 
-$("#edit", page).click(function() {
+$("#edit_app", page).click(function() {
     var rowData = $(this).getRow();
     if (rowData) {
-        sessionStorage.login_person_count = JSON.stringify(rowData);
+        sessionStorage.login_person_count = JSON.stringify({username:rowData.username,from_node:'4'});
+        $.pdialog.open("page/user/login-person-time.html", 'login-person-time', rowData.username, {"width": 800, "height": 510});
+    }
+});
+
+$("#edit_pc", page).click(function() {
+    var rowData = $(this).getRow();
+    if (rowData) {
+        sessionStorage.login_person_count = JSON.stringify({username:rowData.username,from_node:'2'});
         $.pdialog.open("page/user/login-person-time.html", 'login-person-time', rowData.username, {"width": 800, "height": 510});
     }
 });

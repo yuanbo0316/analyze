@@ -18,31 +18,22 @@ and open the template in the editor.
                     </td>
 
                     <td width="50">
-                        监控系统：
+                        IP地址：
                     </td>
                     <td>
-                        <select id="server" style="width: 170px;" >
-                            <option value="" selected="selected">全部</option>
-                        </select>
+                        <input id="ip_addr_trake" type="text"/>
                     </td>
 
                     <td>
                         用户名：
                     </td>
                     <td>
-                        <input id="username_err" type="text"/>
-                    </td>
-                       <td>
-                        IP地址：
-                    </td>
-                    <td>
-                        <input id="ip_err" type="text"/>
+                        <input id="username_traking" type="text"/>
                     </td>
                 </tr>
             </table>
             <div class="subBar">
                 <ul>
-                    <li><div class="buttonActive"><div class="buttonContent"><button type="button" id="search-detail">登陆失败统计</button></div></div></li>
                     <li><div class="buttonActive"><div class="buttonContent"><button type="button" id="search-button">查询</button></div></div></li>
                     <li><div class="buttonActive"><div class="buttonContent"><button type="button" id="search-today">查询今天</button></div></div></li>
                 </ul>
@@ -52,17 +43,21 @@ and open the template in the editor.
 </div>
 
 <div class="pageContent">
-    <table class="table" width="100%" layoutH="117" id="error_login_list">
+    <div class="panelBar">
+        <ul class="toolBar">
+            <li><a class="edit" id="edit" target-table="user_trake_list"><span>查看详细</span></a></li>
+        </ul>
+    </div>
+    <table class="table" width="100%" layoutH="154" id="user_trake_list">
         <thead>
             <tr>
-                <th data-key="exec_time">时间</th>
-                <th data-key="server">系统</th>
+                <th data-key="req_url">请求地址</th>
+                <th data-key="service_code">服务码</th>
+                <th data-key="req_time">访问时间</th>  
+                <th data-key="server">系统</th>                
                 <th data-key="username">用户名</th>
                 <th data-key="ip">IP地址</th>
                 <th data-key="from_node">终端类型</th>
-                <th data-key="opt">登录操作</th>
-                <th data-key="response_code">异常代码</th>
-                <th data-key="response_desc">异常信息</th>
             </tr>
         </thead>
         <tbody>

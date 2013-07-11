@@ -61,7 +61,13 @@ o.sus = function(data) {
             text: '最近30日登陆情况'
         },
         xAxis: {
+            
             categories: categories
+        },
+         yAxis: {
+            title: {
+                text: '人/次'
+            }
         },
         tooltip: {
             crosshairs: true,
