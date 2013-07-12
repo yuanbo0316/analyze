@@ -156,7 +156,7 @@ function abde() {
                         }
                     }]
             },
-            series: [{
+            series: [{ 
                     type: 'pie',
                     name: 'Total consumption',
                     data: today_data1,

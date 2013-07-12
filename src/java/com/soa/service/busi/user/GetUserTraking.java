@@ -31,8 +31,23 @@ public class GetUserTraking extends BaseService {
     @Override
     public void execute(AbstractCommonData in, AbstractCommonData inHead, AbstractCommonData out, AbstractCommonData outHead) {
         int i = 0;
-        List<AbstractCommonData> service_list = queryList("get_user_service", new Object[]{in.getStringValue("end"), in.getStringValue("begin"), in.getStringValue("ip_addr"), in.getStringValue("username_trake")});
-        List<AbstractCommonData> req_list = queryList("get_user_req", new Object[]{in.getStringValue("end"), in.getStringValue("begin"), in.getStringValue("ip_addr"), in.getStringValue("username_trake")});
+        String ip = in.getStringValue("ip_addr");
+        String username = in.getStringValue("username_trake");
+        List<AbstractCommonData> service_list;
+        List<AbstractCommonData> req_list;
+        if (ip != null && username != null) {
+            service_list = queryList("get_user_service_by_all", new Object[]{in.getStringValue("end"), in.getStringValue("begin"),  ip,username});
+            req_list = queryList("get_user_req_by_all", new Object[]{in.getStringValue("end"), in.getStringValue("begin"),  ip,username});
+        } else if (ip == null && username != null) {
+            service_list = queryList("get_user_service_by_username", new Object[]{in.getStringValue("end"), in.getStringValue("begin"),username});
+            req_list = queryList("get_user_req_by_username", new Object[]{in.getStringValue("end"), in.getStringValue("begin"),username});
+        } else if (ip != null && username == null) {
+            service_list = queryList("get_user_service_by_ip", new Object[]{in.getStringValue("end"), in.getStringValue("begin"), ip});
+            req_list = queryList("get_user_req_by_ip", new Object[]{in.getStringValue("end"), in.getStringValue("begin"), ip});
+        } else {
+            service_list = queryList("get_user_service", new Object[]{in.getStringValue("end"), in.getStringValue("begin")});
+            req_list = queryList("get_user_req", new Object[]{in.getStringValue("end"), in.getStringValue("begin")});
+        }
         List<AbstractCommonData> result = new ArrayList<AbstractCommonData>();
         Date req_date, service_date;
         for (int j = 0; j < req_list.size(); j++) {
@@ -40,8 +55,7 @@ public class GetUserTraking extends BaseService {
             for (i = 0; i < service_list.size(); i++) {
                 service_date = service_list.get(i).getDateValue("req_time");
                 if (service_date.before(req_date) || service_date.equals(req_date)) {
-                    
-                }else{
+                } else {
                     break;
                 }
             }

@@ -35,9 +35,17 @@ $("#search-button", page).click(function() {
         o.sus = function(data) {
             var result = data.result;
             for (var i = 0; i < result.length; i++) {
-                result[i].service_code = getParaValue(result[i].server + ".service", result[i].service_code);
+                if (result[i].service_code != null)
+                    result[i].service_code = getParaValue(result[i].server + ".service", result[i].service_code) + "(" + result[i].service_code + ")";
                 result[i].server = getParaValue("st.server", result[i].server);
-                result[i].from_node=getParaValue("st.node", result[i].from_node);
+                result[i].from_node = getParaValue("st.node", result[i].from_node);
+                console.log("=============="+result[i].response_code);
+                if (result[i].response_code != "") {
+                        result[i].success = '失败';
+                } else if (result[i].service_code == null && result[i].response_code == "") {
+                    result[i].success = '成功';
+                } else {
+                }
             }
             padBackTable(data.result, "#user_trake_list");
         }
@@ -47,7 +55,7 @@ $("#search-button", page).click(function() {
 
 $("#search-today", page).click(function() {
     if ($("#username_traking", page).val() == "" && $("#ip_addr_trake", page).val() == "") {
-       alertMsg.confirm("请输入IP或用户名");
+        alertMsg.confirm("请输入IP或用户名");
         return;
     }
     var o = new AjaxOptions();
@@ -61,9 +69,10 @@ $("#search-today", page).click(function() {
     o.sus = function(data) {
         var result = data.result;
         for (var i = 0; i < result.length; i++) {
-            result[i].service_code = getParaValue(result[i].server + ".service", result[i].service_code);
+            if (result[i].service_code != 'undifined')
+                result[i].service_code = getParaValue(result[i].server + ".service", result[i].service_code) + "(" + result[i].service_code + ")";
             result[i].server = getParaValue("st.server", result[i].server);
-            result[i].from_node=getParaValue("st.node", result[i].from_node);
+            result[i].from_node = getParaValue("st.node", result[i].from_node);
         }
         padBackTable(data.result, "#user_trake_list");
     }
