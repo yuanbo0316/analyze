@@ -27,7 +27,7 @@ $("#edit_app", page).click(function() {
     var rowData = $(this).getRow();
     if (rowData) {
         sessionStorage.login_person_count = JSON.stringify({username:rowData.username,from_node:'4'});
-        $.pdialog.open("page/user/login-person-time.html", 'login-person-time', rowData.username, {"width": 800, "height": 510});
+        $.pdialog.open("page/user/login-person-time.html", 'login-person-time', 'app.js客户端登录详细', {"width": 800, "height": 510});
     }
 });
 
@@ -35,6 +35,6 @@ $("#edit_pc", page).click(function() {
     var rowData = $(this).getRow();
     if (rowData) {
         sessionStorage.login_person_count = JSON.stringify({username:rowData.username,from_node:'2'});
-        $.pdialog.open("page/user/login-person-time.html", 'login-person-time', rowData.username, {"width": 800, "height": 510});
+        $.pdialog.open("page/user/login-person-time.html", 'login-person-time', '网站登录详细', {"width": 800, "height": 510});
     }
 });
