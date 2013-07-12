@@ -39,8 +39,9 @@ $("#search-button", navTab.getCurrentPanel()).click(function() {
                     result[i].service_code = getParaValue(result[i].server + ".service", result[i].service_code) + "(" + result[i].service_code + ")";
                 result[i].server = getParaValue("st.server", result[i].server);
                 result[i].from_node = getParaValue("st.node", result[i].from_node);
+                console.log("=============="+result[i].response_code);
                 if (result[i].response_code != "") {
-                    result[i].success = '失败';
+                        result[i].success = '失败';
                 } else if (result[i].service_code == null && result[i].response_code == "") {
                     result[i].success = '成功';
                 } else {
@@ -72,12 +73,6 @@ $("#search-today", navTab.getCurrentPanel()).click(function() {
                 result[i].service_code = getParaValue(result[i].server + ".service", result[i].service_code) + "(" + result[i].service_code + ")";
             result[i].server = getParaValue("st.server", result[i].server);
             result[i].from_node = getParaValue("st.node", result[i].from_node);
-            if (result[i].response_code != "") {
-                result[i].success = '失败';
-            } else if (result[i].service_code == null && result[i].response_code == "") {
-                result[i].success = '成功';
-            } else {
-            }
         }
         padBackTable(data.result, "#user_trake_list");
     }
