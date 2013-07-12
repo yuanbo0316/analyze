@@ -24,7 +24,7 @@ public class GetUserLoginDetail extends BaseService {
 
     @Override
     public void execute(AbstractCommonData in, AbstractCommonData inHead, AbstractCommonData out, AbstractCommonData outHead) {
-       List<AbstractCommonData> list = queryList("get_user_login_detail", in.getStringValue("username"));
+       List<AbstractCommonData> list = queryList("get_user_login_detail", new Object[]{in.getStringValue("username"),in.getStringValue("from_node")});
        out.putArrayValue("list", list);
     }
 }

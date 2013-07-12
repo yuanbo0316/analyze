@@ -8,15 +8,6 @@ and open the template in the editor.
         <div class="searchBar">
             <table class="searchContent" >
                 <tr>
-                    <td>
-                        开始时间：<input type="text" class="date required" id="begin" readonly="readonly" />
-                        <select id="begin-hour"  style="display: none;" ></select><select id="begin-minute" style="display: none;"></select><select id="begin-second" style="display: none;"></select>
-                    </td>
-                    <td>
-                        结束时间：<input type="text" class="date required" id="end" readonly="readonly"/>
-                        <select  id="end-hour"  style="display: none;" ></select><select id="end-minute" style="display: none;"></select><select id="end-second" style="display: none;"></select>
-                    </td>
-
                     <td width="50">
                         监控系统：
                     </td>
@@ -37,10 +28,8 @@ and open the template in the editor.
                 </tr>
             </table>
             <div class="subBar">
-                <ul><li><div class="buttonActive"><div class="buttonContent"><button type="button" id="search-all-detail">异常服务统计（柱状图）</button></div></div></li>
-                    <li><div class="buttonActive"><div class="buttonContent"><button type="button" id="search-detail">服务异常分析（饼状图）</button></div></div></li>
+                <ul>
                     <li><div class="buttonActive"><div class="buttonContent"><button type="button" id="search-button">查询</button></div></div></li>
-                    <li><div class="buttonActive"><div class="buttonContent"><button type="button" id="search-today">查询今天</button></div></div></li>
                 </ul>
             </div>
         </div>
@@ -48,24 +37,5 @@ and open the template in the editor.
 </div>
 
 <div class="pageContent">
-    <div class="panelBar">
-        <ul class="toolBar">
-            <li><a class="edit" id="edit" target-table="error_list"><span>查看详细</span></a></li>
-        </ul>
-    </div>
-    <table class="table" width="100%" layoutH="154" id="error_list">
-        <thead>
-            <tr>
-                <th data-key="save_time">时间</th>
-                <th data-key="server">系统</th>
-                <th data-key="service_code">服务码</th>
-                <th data-key="min_run_time">最短运行时间</th>
-                <th data-key="max_run_time">最长运行时间</th>
-                <th data-key="avg_run_time">平均运行时间</th>
-                <th data-key="times">运行次数</th>
-            </tr>
-        </thead>
-        <tbody>
-        </tbody>
-    </table>
+    <div id="service_run_time"></div>
 </div>
