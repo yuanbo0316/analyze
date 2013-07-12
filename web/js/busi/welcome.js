@@ -150,7 +150,7 @@ function abde() {
                     }, {
                         html: label1,
                         style: {
-                            left: '300px',
+                            left: '280px',
                             top: '10px',
                             color: 'black'
                         }
@@ -170,7 +170,7 @@ function abde() {
                     type: 'pie',
                     name: 'Total consumption',
                     data: today_data2,
-                    center: [300, 90],
+                    center: [310, 90],
                     size: 150,
                     showInLegend: false,
                     dataLabels: {
