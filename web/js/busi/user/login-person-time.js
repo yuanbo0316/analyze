@@ -116,7 +116,12 @@ options.sus = function(data) {
 };
 $.ajax(options);
 
-
+/*
+ *得到today之前len天的日期 ，返回的是字符串格式如：yyyy-mm-dd
+ * @param {date} today
+ * @param {int} len
+ * @returns {Array}
+ */
 function getNearDate(today, len) {
     var list = [];
     for (var i = len - 1; i >= 0; i--) {
@@ -125,6 +130,7 @@ function getNearDate(today, len) {
     }
     return list;
 }
+//计算两个日期相差的天数
 function  DateDiff(sDate1, sDate2) {    //sDate1和sDate2是2006-12-18格式    
     var aDate, oDate1, oDate2, iDays
     aDate = sDate1.split("-")
@@ -135,12 +141,17 @@ function  DateDiff(sDate1, sDate2) {    //sDate1和sDate2是2006-12-18格式
     return  iDays + 1
 }
 
+//将H:M:S转换成小数的形式
 function timeChange(time) {
     var a = parseInt(time.substring(0, 2)) + parseFloat(time.substring(3, 5)) / 60 + parseFloat(time.substring(6)) / 3600;
     return a;
 }
 
+//将小数转换成H:M:S的形式
 function floatChange(time) {
+    if(time>24){
+    return;
+    }
     var a = Math.floor(time);
     var b = Math.floor((time - a) * 60);
     var c = Math.floor(((time - a) * 60 - b) * 60);

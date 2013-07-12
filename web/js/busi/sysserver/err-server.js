@@ -5,21 +5,53 @@
 
 var page = navTab.getCurrentPanel();
 
+var test;
+var ss = [];
 $("#server", page).change(function() {
     if ($("#server", page).val() == 'jtgzfw') {
-        $("#service_code_detail", page).html(" <option value='' selected='selected'>全部</option>");
-        initServiceParaSelect("jtgzfw.service", $("#service_code_detail", page));
+        test = getParaList("jtgzfw.service");
+        for (var i = 0; i < test.length; i++) {
+            ss[i] = test[i].col_value;
+        }
+        $("#op_combox_service_code_detail li").each(function() {
+            $(this).css("display", "block");
+            if ($(this).attr("id") == null || ss.indexOf($(this).attr("id")) != -1) {
+
+            } else {
+                $(this).css("display", "none");
+            }
+        });
     } else if ($("#server", page).val() == 'jtgzfw_man') {
-        $("#service_code_detail", page).html(" <option value='' selected='selected'>全部</option>");
-        initServiceParaSelect("jtgzfw_man.service", $("#service_code_detail", page));
+        test = getParaList("jtgzfw_man.service");
+        for (var i = 0; i < test.length; i++) {
+            ss[i] = test[i].col_value;
+        }
+        $("#op_combox_service_code_detail li").each(function() {
+            $(this).css("display", "block");
+            if ($(this).attr("id") == null || ss.indexOf($(this).attr("id")) != -1) {
+
+            } else {
+                $(this).css("display", "none");
+            }
+        });
     } else if ($("#server", page).val() == 'jtaqxh') {
-        $("#service_code_detail", page).html(" <option value='' selected='selected'>全部</option>");
-        initServiceParaSelect("jtaqxh.service", $("#service_code_detail", page));
+        test = getParaList("jtaqxh.service");
+        for (var i = 0; i < test.length; i++) {
+            ss[i] = test[i].col_value;
+        }
+        $("#op_combox_service_code_detail li").each(function() {
+            $(this).css("display", "block");
+            if ($(this).attr("id") == null || ss.indexOf($(this).attr("id")) != -1) {
+
+            } else {
+                $(this).css("display", "none");
+            }
+        });
     } else {
-        $("#service_code_detail", page).html(" <option value='' selected='selected'>全部</option>");
-        initServiceParaSelect("jtgzfw.service", $("#service_code_detail", page));
-        initServiceParaSelect("jtgzfw_man.service", $("#service_code_detail", page));
-        initServiceParaSelect("jtaqxh.service", $("#service_code_detail", page));
+   
+        $("#op_combox_service_code_detail li").each(function() {
+            $(this).css("display", "block");        
+        });
     }
 });
 
@@ -41,6 +73,7 @@ initParaSelect("st.server", $("#server", page));
 initServiceParaSelect("jtgzfw.service", $("#service_code_detail", page));
 initServiceParaSelect("jtgzfw_man.service", $("#service_code_detail", page));
 initServiceParaSelect("jtaqxh.service", $("#service_code_detail", page));
+$("#service_code_detail", page).combox();
 
 $("#search-button", page).click(function() {
     if ($("#search-form", page).valid()) {
@@ -50,7 +83,7 @@ $("#search-button", page).click(function() {
         var begin = $("#begin", page).val() + " " + $("#begin-hour", page).val() + ":" + $("#begin-minute", page).val() + ":" + $("#begin-second", page).val();
         var end = $("#end", page).val() + " " + $("#end-hour", page).val() + ":" + $("#end-minute", page).val() + ":" + $("#end-second", page).val();
         $("#error_list", page).cutPage({
-             page_size:200,
+            page_size: 200,
             begin: begin,
             end: end,
             service_code_detail: $("#service_code_detail", page).val(),
@@ -69,7 +102,7 @@ $("#search-today", page).click(function() {
     var begin = getNowDate();
     var end = getNowDateTime();
     $("#error_list", page).cutPage({
-         page_size:200,
+        page_size: 200,
         begin: begin,
         end: end,
         service_code_detail: $("#service_code_detail", page).val(),
@@ -84,9 +117,9 @@ $("#search-today", page).click(function() {
 });
 $("#search-detail", page).click(function() {
     var begin = $("#begin", page).val();
-    var end = $("#end", page).val() ;
-    if(begin==""|| end==""){
-         alertMsg.confirm("请设置时间");
+    var end = $("#end", page).val();
+    if (begin == "" || end == "") {
+        alertMsg.confirm("请设置时间");
         return;
     }
     if ($("#service_code_detail", page).val() == "" || $("#server", page).val() == "") {
@@ -99,9 +132,9 @@ $("#search-detail", page).click(function() {
 
 $("#search-all-detail", page).click(function() {
     var begin = $("#begin", page).val();
-    var end = $("#end", page).val() ;
-    if(begin==""|| end==""){
-         alertMsg.confirm("请设置时间");
+    var end = $("#end", page).val();
+    if (begin == "" || end == "") {
+        alertMsg.confirm("请设置时间");
         return;
     }
     sessionStorage.err_server_all = JSON.stringify({begin: begin, end: end});

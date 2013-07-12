@@ -4,27 +4,62 @@
  */
 
 var page = navTab.getCurrentPanel();
+
+//根据不同的server生成相应的service_code
+var test;
+var ss = [];
 $("#server", page).change(function() {
     if ($("#server", page).val() == 'jtgzfw') {
-        $("#service_code_detail", page).html(" <option value='' selected='selected'>全部</option>");
-        initServiceParaSelect("jtgzfw.service", $("#service_code_detail", page));
+        test = getParaList("jtgzfw.service");
+        for (var i = 0; i < test.length; i++) {
+            ss[i] = test[i].col_value;
+        }
+        $("#op_combox_service_code_detail li").each(function() {
+            $(this).css("display", "block");
+            if ($(this).attr("id") == null || ss.indexOf($(this).attr("id")) != -1) {
+
+            } else {
+                $(this).css("display", "none");
+            }
+        });
     } else if ($("#server", page).val() == 'jtgzfw_man') {
-        $("#service_code_detail", page).html(" <option value='' selected='selected'>全部</option>");
-        initServiceParaSelect("jtgzfw_man.service", $("#service_code_detail", page));
+        test = getParaList("jtgzfw_man.service");
+        for (var i = 0; i < test.length; i++) {
+            ss[i] = test[i].col_value;
+        }
+        $("#op_combox_service_code_detail li").each(function() {
+            $(this).css("display", "block");
+            if ($(this).attr("id") == null || ss.indexOf($(this).attr("id")) != -1) {
+
+            } else {
+                $(this).css("display", "none");
+            }
+        });
     } else if ($("#server", page).val() == 'jtaqxh') {
-        $("#service_code_detail", page).html(" <option value='' selected='selected'>全部</option>");
-        initServiceParaSelect("jtaqxh.service", $("#service_code_detail", page));
+        test = getParaList("jtaqxh.service");
+        for (var i = 0; i < test.length; i++) {
+            ss[i] = test[i].col_value;
+        }
+        $("#op_combox_service_code_detail li").each(function() {
+            $(this).css("display", "block");
+            if ($(this).attr("id") == null || ss.indexOf($(this).attr("id")) != -1) {
+
+            } else {
+                $(this).css("display", "none");
+            }
+        });
     } else {
-        $("#service_code_detail", page).html(" <option value='' selected='selected'>全部</option>");
-        initServiceParaSelect("jtgzfw.service", $("#service_code_detail", page));
-        initServiceParaSelect("jtgzfw_man.service", $("#service_code_detail", page));
-        initServiceParaSelect("jtaqxh.service", $("#service_code_detail", page));
+        $("#op_combox_service_code_detail li").each(function() {
+            $(this).css("display", "block");
+        });
     }
 });
 initParaSelect("st.server", $("#server", page));
 initServiceParaSelect("jtgzfw.service", $("#service_code_detail", page));
 initServiceParaSelect("jtgzfw_man.service", $("#service_code_detail", page));
 initServiceParaSelect("jtaqxh.service", $("#service_code_detail", page));
+
+$("#service_code_detail", page).combox();
 $("#search-button", page).click(function() {
     if ($("#service_code_detail", page).val() == null || $("#server", page).val() == null) {
         alertMsg("请选择监控服务和服务码");
@@ -45,10 +80,10 @@ $("#search-button", page).click(function() {
         var year = "";
         var day = "";
         var month = "";
-        if ((list[0].save_time).substring(0, 4) == (list[list.length-1].save_time).substring(0, 4)) {
+        if ((list[0].save_time).substring(0, 4) == (list[list.length - 1].save_time).substring(0, 4)) {
             year = (list[0].save_time).substring(0, 4) + '年';
         } else {
-            year = (list[0].save_time).substring(0, 4) + '年到' + (list[list.length-1].save_time).substring(0, 4) + '年';
+            year = (list[0].save_time).substring(0, 4) + '年到' + (list[list.length - 1].save_time).substring(0, 4) + '年';
         }
         series[0] = {"name": "最长运行时间", "data": []};
         series[1] = {"name": "最短运行时间", "data": []};
@@ -99,7 +134,7 @@ $("#search-button", page).click(function() {
             xAxis: {
                 tickInterval: 8,
                 categories: categories,
-                showLastLabel:true,
+                showLastLabel: true,
                 labels: {
                     rotation: 0,
                     align: 'right',
