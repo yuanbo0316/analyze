@@ -9,6 +9,14 @@ and open the template in the editor.
             <table class="searchContent" >
                 <tr>
                     <td>
+                        开始时间：<input type="text" class="date required" id="begin" readonly="readonly" />
+                        <select id="begin-hour"  style="display: none;" ></select><select id="begin-minute" style="display: none;"></select><select id="begin-second" style="display: none;"></select>
+                    </td>
+                    <td>
+                        结束时间：<input type="text" class="date required" id="end" readonly="readonly"/>
+                        <select  id="end-hour"  style="display: none;" ></select><select id="end-minute" style="display: none;"></select><select id="end-second" style="display: none;"></select>
+                    </td>
+                    <td>
                         选择超时：
                     </td>
                     <td>
@@ -25,16 +33,7 @@ and open the template in the editor.
                             <option value="" selected="selected">全部</option>
                         </select>
                     </td>
-                    <td>
-                        开始时间：<input type="text" class="date required" id="begin" readonly="readonly" />
-                        <select id="begin-hour"  style="display: none;" ></select><select id="begin-minute" style="display: none;"></select><select id="begin-second" style="display: none;"></select>
-                    </td>
-                    <td>
-                        结束时间：<input type="text" class="date required" id="end" readonly="readonly"/>
-                        <select  id="end-hour"  style="display: none;" ></select><select id="end-minute" style="display: none;"></select><select id="end-second" style="display: none;"></select>
-                    </td>
-                </tr>
-                <tr>
+
                     <td>
                         请求地址：
                     </td>
@@ -59,7 +58,7 @@ and open the template in the editor.
             <li><a class="edit" id="edit" target-table="req_warn_list"><span>查看详细</span></a></li>
         </ul>
     </div>
-    <table class="table" width="100%" layoutH="179" id="req_warn_list">
+    <table class="table" width="100%" layoutH="139" id="req_warn_list">
         <thead>
             <tr>
                 <th data-key="req_time">时间</th>
