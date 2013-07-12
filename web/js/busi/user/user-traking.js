@@ -17,8 +17,8 @@ for (var i = 0; i < 60; i++) {
 }
 
 $("#search-button", page).click(function() {
-    if ($("#username_traking", page).val() == null && $("ip_addr", page).val() == null) {
-        alertMsg("请输入IP或用户名");
+    if ($("#username_traking", page).val() == "" && $("#ip_addr_trake", page).val() == "") {
+        alertMsg.confirm("请输入IP或用户名");
         return;
     }
     if ($("#search-form", page).valid()) {
@@ -29,7 +29,7 @@ $("#search-button", page).click(function() {
         o.put("begin", begin);
         o.put("end", end);
         o.put("username_trake", $("#username_traking", page).val());
-        o.put("ip_addr", $("ip_addr_trake").val() ? $("ip_addr_trake").val() : "0:0:0:0:0:0:0:1");
+        o.put("ip_addr", $("#ip_addr_trake").val());
         $("ip_addr_trake", page).remove();
         o.put("service_code", "S34112");
         o.sus = function(data) {
@@ -46,8 +46,8 @@ $("#search-button", page).click(function() {
 });
 
 $("#search-today", page).click(function() {
-    if ($("#username_traking", page).val() == null && $("ip_addr", page).val() == null) {
-        alertMsg("请输入IP或用户名");
+    if ($("#username_traking", page).val() == "" && $("#ip_addr_trake", page).val() == "") {
+       alertMsg.confirm("请输入IP或用户名");
         return;
     }
     var o = new AjaxOptions();
@@ -55,7 +55,7 @@ $("#search-today", page).click(function() {
     o.put("begin", getNowDate());
     o.put("end", getNowDateTime());
     o.put("username_trake", $("#username_traking", page).val());
-    o.put("ip_addr", $("ip_addr_trake").val());
+    o.put("ip_addr", $("#ip_addr_trake").val());
     $("ip_addr_trake", page).remove();
     o.put("service_code", "S34112");
     o.sus = function(data) {
