@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 var jsonStr = sessionStorage.req_warn_dialog;
-//sessionStorage.removeItem("req_warn_dialog");
+sessionStorage.removeItem("req_warn_dialog");
 if (jsonStr) {
     padBackData(JSON.parse(jsonStr), "", true);
 }

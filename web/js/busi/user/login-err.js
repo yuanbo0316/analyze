@@ -1,31 +1,31 @@
-var page = navTab.getCurrentPanel();
 
 
-initParaSelect("st.server", $("#server", page));
+
+initParaSelect("st.server", $("#server", navTab.getCurrentPanel()));
 for (var i = 0; i < 24; i++) {
     var o = i < 10 ? "0" + i : i;
     var option = $("<option/>").attr("value", o).html(o);
-    $("#begin-hour,#end-hour", page).append(option);
+    $("#begin-hour,#end-hour", navTab.getCurrentPanel()).append(option);
 }
 
 for (var i = 0; i < 60; i++) {
     var o = i < 10 ? "0" + i : i;
     var option = $("<option/>").attr("value", o).html(o);
-    $("#begin-minute,#end-minute,#begin-second,#end-second", page).append(option);
+    $("#begin-minute,#end-minute,#begin-second,#end-second", navTab.getCurrentPanel()).append(option);
 }
 
-$("#search-button", page).click(function() {
-    if ($("#search-form", page).valid()) {
-        var begin = $("#begin", page).val() + " " + $("#begin-hour", page).val() + ":" + $("#begin-minute", page).val() + ":" + $("#begin-second", page).val();
-        var end = $("#end", page).val() + " " + $("#end-hour", page).val() + ":" + $("#end-minute", page).val() + ":" + $("#end-second", page).val();
+$("#search-button", navTab.getCurrentPanel()).click(function() {
+    if ($("#search-form", navTab.getCurrentPanel()).valid()) {
+        var begin = $("#begin", navTab.getCurrentPanel()).val() + " " + $("#begin-hour", navTab.getCurrentPanel()).val() + ":" + $("#begin-minute", navTab.getCurrentPanel()).val() + ":" + $("#begin-second", navTab.getCurrentPanel()).val();
+        var end = $("#end", navTab.getCurrentPanel()).val() + " " + $("#end-hour", navTab.getCurrentPanel()).val() + ":" + $("#end-minute", navTab.getCurrentPanel()).val() + ":" + $("#end-second", navTab.getCurrentPanel()).val();
 
-        $("#error_login_list", page).cutPage({
+        $("#error_login_list", navTab.getCurrentPanel()).cutPage({
             page_size: 200,
-            ip_err: $("#ip_err", page).val(),
+            ip_err: $("#ip_err", navTab.getCurrentPanel()).val(),
             begin: begin,
             end: end,
-            username_err: $("#username_err", page).val(),
-            server: $("#server", page).val(),
+            username_err: $("#username_err", navTab.getCurrentPanel()).val(),
+            server: $("#server", navTab.getCurrentPanel()).val(),
             service_code: "S34109"}, function(list) {
             for (var i = 0; i < list.length; i++) {
                 list[i].server = getParaValue("st.server", list[i].server);
@@ -36,16 +36,16 @@ $("#search-button", page).click(function() {
     }
 });
 
-$("#search-today", page).click(function() {
+$("#search-today", navTab.getCurrentPanel()).click(function() {
     var begin = getNowDate();
     var end = getNowDateTime();
-    $("#error_login_list", page).cutPage({
+    $("#error_login_list", navTab.getCurrentPanel()).cutPage({
         page_size: 200,
-        ip_err: $("#ip_err", page).val(),
+        ip_err: $("#ip_err", navTab.getCurrentPanel()).val(),
         begin: begin,
         end: end,
-        username_err: $("#username_err", page).val(),
-        server: $("#server", page).val(),
+        username_err: $("#username_err", navTab.getCurrentPanel()).val(),
+        server: $("#server", navTab.getCurrentPanel()).val(),
         service_code: "S34109"
     }, function(list) {
         for (var i = 0; i < list.length; i++) {
@@ -58,17 +58,17 @@ $("#search-today", page).click(function() {
     });
 });
 
-$("#search-detail", page).click(function() {
-    var begin = $("#begin", page).val();
-    var end = $("#end", page).val();
+$("#search-detail", navTab.getCurrentPanel()).click(function() {
+    var begin = $("#begin", navTab.getCurrentPanel()).val();
+    var end = $("#end", navTab.getCurrentPanel()).val();
     if (begin == "" || end == "") {
         alertMsg.confirm("请设置时间");
         return;
     }
-    if ( $("#server", page).val() == "") {
+    if ( $("#server", navTab.getCurrentPanel()).val() == "") {
         alertMsg.confirm("监控系统不能为空");
         return;
     }
-    sessionStorage.log_err_detail = JSON.stringify({server: $("#server", page).val(),begin: begin, end: end,username_err: $("#username_err", page).val(),ip_err: $("#ip_err", page).val()});
-    $.pdialog.open("page/user/login-err-detail.html", 'login-err-detail','用户登录失败统计', {"width": 800, "height": 510});
+    sessionStorage.log_err_detail = JSON.stringify({server: $("#server", navTab.getCurrentPanel()).val(),begin: begin, end: end,username_err: $("#username_err", navTab.getCurrentPanel()).val(),ip_err: $("#ip_err", navTab.getCurrentPanel()).val()});
+    $.pdialog.open("navTab.getCurrentPanel()/user/login-err-detail.html", 'login-err-detail','用户登录失败统计', {"width": 800, "height": 510});
 });

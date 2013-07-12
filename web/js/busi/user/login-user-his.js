@@ -2,17 +2,17 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-var page = navTab.getCurrentPanel();
 
-initParaSelect("st.server", $("#server", page));
 
-$("#search-button", page).click(function() {
-    $("#login_his_list", page).cutPage({
+initParaSelect("st.server", $("#server", navTab.getCurrentPanel()));
+
+$("#search-button", navTab.getCurrentPanel()).click(function() {
+    $("#login_his_list", navTab.getCurrentPanel()).cutPage({
         timeout:30000,
         page_size: 200,
-        username_his:$("#username_his",page).val(),
-        from_node: $("#from_node", page).val(),
-        server: $("#server", page).val(),
+        username_his:$("#username_his",navTab.getCurrentPanel()).val(),
+        from_node: $("#from_node", navTab.getCurrentPanel()).val(),
+        server: $("#server", navTab.getCurrentPanel()).val(),
         service_code: "S34107"
     }, function(list) {
         for (var i = 0; i < list.length; i++) {
@@ -23,18 +23,18 @@ $("#search-button", page).click(function() {
 
 });
 
-$("#edit_app", page).click(function() {
+$("#edit_app", navTab.getCurrentPanel()).click(function() {
     var rowData = $(this).getRow();
     if (rowData) {
         sessionStorage.login_person_count = JSON.stringify({username:rowData.username,from_node:'4'});
-        $.pdialog.open("page/user/login-person-time.html", 'login-person-time', 'app.js客户端登录详细', {"width": 800, "height": 510});
+        $.pdialog.open("navTab.getCurrentPanel()/user/login-person-time.html", 'login-person-time', 'app.js客户端登录详细', {"width": 800, "height": 510});
     }
 });
 
-$("#edit_pc", page).click(function() {
+$("#edit_pc", navTab.getCurrentPanel()).click(function() {
     var rowData = $(this).getRow();
     if (rowData) {
         sessionStorage.login_person_count = JSON.stringify({username:rowData.username,from_node:'2'});
-        $.pdialog.open("page/user/login-person-time.html", 'login-person-time', '网站登录详细', {"width": 800, "height": 510});
+        $.pdialog.open("navTab.getCurrentPanel()/user/login-person-time.html", 'login-person-time', '网站登录详细', {"width": 800, "height": 510});
     }
 });

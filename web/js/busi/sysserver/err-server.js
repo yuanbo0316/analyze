@@ -3,12 +3,12 @@
  * and open the template in the editor.
  */
 
-var page = navTab.getCurrentPanel();
+
 
 var test;
 var ss = [];
-$("#server", page).change(function() {
-    if ($("#server", page).val() == 'jtgzfw') {
+$("#server", navTab.getCurrentPanel()).change(function() {
+    if ($("#server", navTab.getCurrentPanel()).val() == 'jtgzfw') {
         test = getParaList("jtgzfw.service");
         for (var i = 0; i < test.length; i++) {
             ss[i] = test[i].col_value;
@@ -21,7 +21,7 @@ $("#server", page).change(function() {
                 $(this).css("display", "none");
             }
         });
-    } else if ($("#server", page).val() == 'jtgzfw_man') {
+    } else if ($("#server", navTab.getCurrentPanel()).val() == 'jtgzfw_man') {
         test = getParaList("jtgzfw_man.service");
         for (var i = 0; i < test.length; i++) {
             ss[i] = test[i].col_value;
@@ -34,7 +34,7 @@ $("#server", page).change(function() {
                 $(this).css("display", "none");
             }
         });
-    } else if ($("#server", page).val() == 'jtaqxh') {
+    } else if ($("#server", navTab.getCurrentPanel()).val() == 'jtaqxh') {
         test = getParaList("jtaqxh.service");
         for (var i = 0; i < test.length; i++) {
             ss[i] = test[i].col_value;
@@ -60,34 +60,34 @@ $("#server", page).change(function() {
 for (var i = 0; i < 24; i++) {
     var o = i < 10 ? "0" + i : i;
     var option = $("<option/>").attr("value", o).html(o);
-    $("#begin-hour,#end-hour", page).append(option);
+    $("#begin-hour,#end-hour", navTab.getCurrentPanel()).append(option);
 }
 
 for (var i = 0; i < 60; i++) {
     var o = i < 10 ? "0" + i : i;
     var option = $("<option/>").attr("value", o).html(o);
-    $("#begin-minute,#end-minute,#begin-second,#end-second", page).append(option);
+    $("#begin-minute,#end-minute,#begin-second,#end-second", navTab.getCurrentPanel()).append(option);
 }
 
-initParaSelect("st.server", $("#server", page));
-initServiceParaSelect("jtgzfw.service", $("#service_code_detail", page));
-initServiceParaSelect("jtgzfw_man.service", $("#service_code_detail", page));
-initServiceParaSelect("jtaqxh.service", $("#service_code_detail", page));
-$("#service_code_detail", page).combox();
+initParaSelect("st.server", $("#server", navTab.getCurrentPanel()));
+initServiceParaSelect("jtgzfw.service", $("#service_code_detail", navTab.getCurrentPanel()));
+initServiceParaSelect("jtgzfw_man.service", $("#service_code_detail", navTab.getCurrentPanel()));
+initServiceParaSelect("jtaqxh.service", $("#service_code_detail", navTab.getCurrentPanel()));
+$("#service_code_detail", navTab.getCurrentPanel()).combox();
 
-$("#search-button", page).click(function() {
-    if ($("#search-form", page).valid()) {
+$("#search-button", navTab.getCurrentPanel()).click(function() {
+    if ($("#search-form", navTab.getCurrentPanel()).valid()) {
         //%20=" "   %3A=":"
-//        var begin = $("#begin", page).val() + "%20" + $("#begin-hour", page).val() + "%3A" + $("#begin-minute", page).val() + "%3A" + $("#begin-second", page).val();
-//        var end = $("#end", page).val() + "%20" + $("#end-hour", page).val() + "%3A" + $("#end-minute", page).val() + "%3A" + $("#end-second", page).val();
-        var begin = $("#begin", page).val() + " " + $("#begin-hour", page).val() + ":" + $("#begin-minute", page).val() + ":" + $("#begin-second", page).val();
-        var end = $("#end", page).val() + " " + $("#end-hour", page).val() + ":" + $("#end-minute", page).val() + ":" + $("#end-second", page).val();
-        $("#error_list", page).cutPage({
+//        var begin = $("#begin", navTab.getCurrentPanel()).val() + "%20" + $("#begin-hour", navTab.getCurrentPanel()).val() + "%3A" + $("#begin-minute", navTab.getCurrentPanel()).val() + "%3A" + $("#begin-second", navTab.getCurrentPanel()).val();
+//        var end = $("#end", navTab.getCurrentPanel()).val() + "%20" + $("#end-hour", navTab.getCurrentPanel()).val() + "%3A" + $("#end-minute", navTab.getCurrentPanel()).val() + "%3A" + $("#end-second", navTab.getCurrentPanel()).val();
+        var begin = $("#begin", navTab.getCurrentPanel()).val() + " " + $("#begin-hour", navTab.getCurrentPanel()).val() + ":" + $("#begin-minute", navTab.getCurrentPanel()).val() + ":" + $("#begin-second", navTab.getCurrentPanel()).val();
+        var end = $("#end", navTab.getCurrentPanel()).val() + " " + $("#end-hour", navTab.getCurrentPanel()).val() + ":" + $("#end-minute", navTab.getCurrentPanel()).val() + ":" + $("#end-second", navTab.getCurrentPanel()).val();
+        $("#error_list", navTab.getCurrentPanel()).cutPage({
             page_size: 200,
             begin: begin,
             end: end,
-            service_code_detail: $("#service_code_detail", page).val(),
-            server: $("#server", page).val(),
+            service_code_detail: $("#service_code_detail", navTab.getCurrentPanel()).val(),
+            server: $("#server", navTab.getCurrentPanel()).val(),
             service_code: "S34201"
         }, function(list) {
             for (var i = 0; i < list.length; i++) {
@@ -98,15 +98,15 @@ $("#search-button", page).click(function() {
     }
 });
 
-$("#search-today", page).click(function() {
+$("#search-today", navTab.getCurrentPanel()).click(function() {
     var begin = getNowDate();
     var end = getNowDateTime();
-    $("#error_list", page).cutPage({
+    $("#error_list", navTab.getCurrentPanel()).cutPage({
         page_size: 200,
         begin: begin,
         end: end,
-        service_code_detail: $("#service_code_detail", page).val(),
-        server: $("#server", page).val(),
+        service_code_detail: $("#service_code_detail", navTab.getCurrentPanel()).val(),
+        server: $("#server", navTab.getCurrentPanel()).val(),
         service_code: "S34201"
     }, function(list) {
         for (var i = 0; i < list.length; i++) {
@@ -115,37 +115,37 @@ $("#search-today", page).click(function() {
         }
     });
 });
-$("#search-detail", page).click(function() {
-    var begin = $("#begin", page).val();
-    var end = $("#end", page).val();
+$("#search-detail", navTab.getCurrentPanel()).click(function() {
+    var begin = $("#begin", navTab.getCurrentPanel()).val();
+    var end = $("#end", navTab.getCurrentPanel()).val();
     if (begin == "" || end == "") {
         alertMsg.confirm("请设置时间");
         return;
     }
-    if ($("#service_code_detail", page).val() == "" || $("#server", page).val() == "") {
+    if ($("#service_code_detail", navTab.getCurrentPanel()).val() == "" || $("#server", navTab.getCurrentPanel()).val() == "") {
         alertMsg.confirm("监控系统和服务码不能为空");
         return;
     }
-    sessionStorage.err_server_detail = JSON.stringify({server: $("#server", page).val(), service_code: $("#service_code_detail", page).val(), begin: begin, end: end});
-    $.pdialog.open("page/sysserver/err-server-detail.html", 'err-server-detail', getParaValue($("#server", page).val() + ".service", $("#service_code_detail", page).val()), {"width": 800, "height": 510});
+    sessionStorage.err_server_detail = JSON.stringify({server: $("#server", navTab.getCurrentPanel()).val(), service_code: $("#service_code_detail", navTab.getCurrentPanel()).val(), begin: begin, end: end});
+    $.pdialog.open("navTab.getCurrentPanel()/sysserver/err-server-detail.html", 'err-server-detail', getParaValue($("#server", navTab.getCurrentPanel()).val() + ".service", $("#service_code_detail", navTab.getCurrentPanel()).val()), {"width": 800, "height": 510});
 });
 
-$("#search-all-detail", page).click(function() {
-    var begin = $("#begin", page).val();
-    var end = $("#end", page).val();
+$("#search-all-detail", navTab.getCurrentPanel()).click(function() {
+    var begin = $("#begin", navTab.getCurrentPanel()).val();
+    var end = $("#end", navTab.getCurrentPanel()).val();
     if (begin == "" || end == "") {
         alertMsg.confirm("请设置时间");
         return;
     }
     sessionStorage.err_server_all = JSON.stringify({begin: begin, end: end});
-    $.pdialog.open("page/sysserver/err-server-all.html", 'err-server-all', "服务异常统计", {"width": 800, "height": 510});
+    $.pdialog.open("navTab.getCurrentPanel()/sysserver/err-server-all.html", 'err-server-all', "服务异常统计", {"width": 800, "height": 510});
 });
 
-$("#edit", page).click(function() {
+$("#edit", navTab.getCurrentPanel()).click(function() {
     var rowData = $(this).getRow();
     if (rowData) {
         sessionStorage.err_server_dialog = JSON.stringify(rowData);
-        $.pdialog.open("page/sysserver/err-server-dialog.html", 'err-server-dialog', rowData.response_desc, {"width": 800, "height": 610});
+        $.pdialog.open("navTab.getCurrentPanel()/sysserver/err-server-dialog.html", 'err-server-dialog', rowData.response_desc, {"width": 800, "height": 610});
     }
 });
 

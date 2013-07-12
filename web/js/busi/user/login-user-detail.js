@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-var page = navTab.getCurrentPanel();
+
 
 
 
@@ -39,7 +39,7 @@ o.sus = function(data) {
         }
         i++;
     }
-     $('#log-final-line', page).highcharts({
+     $('#log-final-line', navTab.getCurrentPanel()).highcharts({
         chart: {type: 'spline'},
         title: {text: '最近30天的用户登录情况'},
         xAxis: {
@@ -68,14 +68,14 @@ o.sus = function(data) {
 };
 $.ajax(o);
 
-$("#search-button", page).click(function() {
+$("#search-button", navTab.getCurrentPanel()).click(function() {
     var series;
-    if ($("#server_user", page).val() == "jtgzfw") {
+    if ($("#server_user", navTab.getCurrentPanel()).val() == "jtgzfw") {
         series = series1;
     } else {
         series = series2;
     }
-    $('#log-final-line', page).highcharts({
+    $('#log-final-line', navTab.getCurrentPanel()).highcharts({
         chart: {type: 'spline'},
         title: {text: '最近30天的用户登录情况'},
         xAxis: {

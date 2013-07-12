@@ -3,33 +3,33 @@
  * and open the template in the editor.
  */
 
-var page = navTab.getCurrentPanel();
+
 
 for (var i = 0; i < 24; i++) {
     var o = i < 10 ? "0" + i : i;
     var option = $("<option/>").attr("value", o).html(o);
-    $("#begin-hour,#end-hour", page).append(option);
+    $("#begin-hour,#end-hour", navTab.getCurrentPanel()).append(option);
 }
 
 for (var i = 0; i < 60; i++) {
     var o = i < 10 ? "0" + i : i;
     var option = $("<option/>").attr("value", o).html(o);
-    $("#begin-minute,#end-minute,#begin-second,#end-second", page).append(option);
+    $("#begin-minute,#end-minute,#begin-second,#end-second", navTab.getCurrentPanel()).append(option);
 }
 
-initParaSelect("st.server", $("#server", page));
+initParaSelect("st.server", $("#server", navTab.getCurrentPanel()));
 
-$("#search-button", page).click(function() {
-    if ($("#search-form", page).valid()) {
+$("#search-button", navTab.getCurrentPanel()).click(function() {
+    if ($("#search-form", navTab.getCurrentPanel()).valid()) {
         //%20=" "   %3A=":"
-//        var begin = $("#begin", page).val() + "%20" + $("#begin-hour", page).val() + "%3A" + $("#begin-minute", page).val() + "%3A" + $("#begin-second", page).val();
-//        var end = $("#end", page).val() + "%20" + $("#end-hour", page).val() + "%3A" + $("#end-minute", page).val() + "%3A" + $("#end-second", page).val();
-        var begin = $("#begin", page).val() + " " + $("#begin-hour", page).val() + ":" + $("#begin-minute", page).val() + ":" + $("#begin-second", page).val();
-        var end = $("#end", page).val() + " " + $("#end-hour", page).val() + ":" + $("#end-minute", page).val() + ":" + $("#end-second", page).val();
-        $("#error_list", page).cutPage({
+//        var begin = $("#begin", navTab.getCurrentPanel()).val() + "%20" + $("#begin-hour", navTab.getCurrentPanel()).val() + "%3A" + $("#begin-minute", navTab.getCurrentPanel()).val() + "%3A" + $("#begin-second", navTab.getCurrentPanel()).val();
+//        var end = $("#end", navTab.getCurrentPanel()).val() + "%20" + $("#end-hour", navTab.getCurrentPanel()).val() + "%3A" + $("#end-minute", navTab.getCurrentPanel()).val() + "%3A" + $("#end-second", navTab.getCurrentPanel()).val();
+        var begin = $("#begin", navTab.getCurrentPanel()).val() + " " + $("#begin-hour", navTab.getCurrentPanel()).val() + ":" + $("#begin-minute", navTab.getCurrentPanel()).val() + ":" + $("#begin-second", navTab.getCurrentPanel()).val();
+        var end = $("#end", navTab.getCurrentPanel()).val() + " " + $("#end-hour", navTab.getCurrentPanel()).val() + ":" + $("#end-minute", navTab.getCurrentPanel()).val() + ":" + $("#end-second", navTab.getCurrentPanel()).val();
+        $("#error_list", navTab.getCurrentPanel()).cutPage({
             begin: begin,
             end: end,
-            server: $("#server", page).val(),
+            server: $("#server", navTab.getCurrentPanel()).val(),
             service_code: "S34501"
         }, function(list) {
             for (var i = 0; i < list.length; i++) {
@@ -39,11 +39,11 @@ $("#search-button", page).click(function() {
     }
 });
 
-$("#search-today", page).click(function() {
-    $("#error_list", page).cutPage({
+$("#search-today", navTab.getCurrentPanel()).click(function() {
+    $("#error_list", navTab.getCurrentPanel()).cutPage({
         begin: getNowDate(),
         end: getNowDateTime(),
-        server: $("#server", page).val(),
+        server: $("#server", navTab.getCurrentPanel()).val(),
         service_code: "S34501"
     }, function(list) {
         for (var i = 0; i < list.length; i++) {
@@ -52,11 +52,11 @@ $("#search-today", page).click(function() {
     });
 }).trigger("click");
 
-$("#edit", page).click(function() {
+$("#edit", navTab.getCurrentPanel()).click(function() {
     var rowData = $(this).getRow();
     if (rowData) {
         sessionStorage.st_err_detail = JSON.stringify(rowData);
-        $.pdialog.open("page/other/st-err-dialog.html", 'st_err_dialog', rowData.msg, {"width": 800, "height": 420});
+        $.pdialog.open("navTab.getCurrentPanel()/other/st-err-dialog.html", 'st_err_dialog', rowData.msg, {"width": 800, "height": 420});
     }
 });
 

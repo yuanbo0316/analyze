@@ -3,18 +3,18 @@
  * and open the template in the editor.
  */
 
-var page = navTab.getCurrentPanel();
 
-initParaSelect("st.server", $("#server", page));
-$("#search-button", page).click(function() {
-    if ($("#sql_name", page).val() == null || $("#server", page).val() == null) {
+
+initParaSelect("st.server", $("#server", navTab.getCurrentPanel()));
+$("#search-button", navTab.getCurrentPanel()).click(function() {
+    if ($("#sql_name", navTab.getCurrentPanel()).val() == null || $("#server", navTab.getCurrentPanel()).val() == null) {
         alertMsg("请选择监控服务和SQL语句");
         return;
     }
     var o = new AjaxOptions();
     o.timeout = 30000;
-    o.put("server", $("#server", page).val());
-    o.put("sql_name", $("#sql_name", page).val());
+    o.put("server", $("#server", navTab.getCurrentPanel()).val());
+    o.put("sql_name", $("#sql_name", navTab.getCurrentPanel()).val());
     o.put("service_code", "S34401");
     o.sus = function(data) {
         var list = data.list;
@@ -74,9 +74,9 @@ $("#search-button", page).click(function() {
             series[2].data[k + j + i] = parseInt(h_list[i].avg_run_time);
         }
 
-        $('#sql_run_time', page).highcharts({
+        $('#sql_run_time', navTab.getCurrentPanel()).highcharts({
             chart: {type: 'spline'},
-            title: {text: $("#sql_name", page).val() + '运行情况(' + year + ')'},
+            title: {text: $("#sql_name", navTab.getCurrentPanel()).val() + '运行情况(' + year + ')'},
             xAxis: {
                 tickInterval: 8,
                 categories: categories,

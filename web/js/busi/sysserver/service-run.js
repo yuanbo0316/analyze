@@ -3,13 +3,13 @@
  * and open the template in the editor.
  */
 
-var page = navTab.getCurrentPanel();
+
 
 //根据不同的server生成相应的service_code
 var test;
 var ss = [];
-$("#server", page).change(function() {
-    if ($("#server", page).val() == 'jtgzfw') {
+$("#server", navTab.getCurrentPanel()).change(function() {
+    if ($("#server", navTab.getCurrentPanel()).val() == 'jtgzfw') {
         test = getParaList("jtgzfw.service");
         for (var i = 0; i < test.length; i++) {
             ss[i] = test[i].col_value;
@@ -22,7 +22,7 @@ $("#server", page).change(function() {
                 $(this).css("display", "none");
             }
         });
-    } else if ($("#server", page).val() == 'jtgzfw_man') {
+    } else if ($("#server", navTab.getCurrentPanel()).val() == 'jtgzfw_man') {
         test = getParaList("jtgzfw_man.service");
         for (var i = 0; i < test.length; i++) {
             ss[i] = test[i].col_value;
@@ -35,7 +35,7 @@ $("#server", page).change(function() {
                 $(this).css("display", "none");
             }
         });
-    } else if ($("#server", page).val() == 'jtaqxh') {
+    } else if ($("#server", navTab.getCurrentPanel()).val() == 'jtaqxh') {
         test = getParaList("jtaqxh.service");
         for (var i = 0; i < test.length; i++) {
             ss[i] = test[i].col_value;
@@ -54,21 +54,21 @@ $("#server", page).change(function() {
         });
     }
 });
-initParaSelect("st.server", $("#server", page));
-initServiceParaSelect("jtgzfw.service", $("#service_code_detail", page));
-initServiceParaSelect("jtgzfw_man.service", $("#service_code_detail", page));
-initServiceParaSelect("jtaqxh.service", $("#service_code_detail", page));
+initParaSelect("st.server", $("#server", navTab.getCurrentPanel()));
+initServiceParaSelect("jtgzfw.service", $("#service_code_detail", navTab.getCurrentPanel()));
+initServiceParaSelect("jtgzfw_man.service", $("#service_code_detail", navTab.getCurrentPanel()));
+initServiceParaSelect("jtaqxh.service", $("#service_code_detail", navTab.getCurrentPanel()));
 
-$("#service_code_detail", page).combox();
-$("#search-button", page).click(function() {
-    if ($("#service_code_detail", page).val() == null || $("#server", page).val() == null) {
+$("#service_code_detail", navTab.getCurrentPanel()).combox();
+$("#search-button", navTab.getCurrentPanel()).click(function() {
+    if ($("#service_code_detail", navTab.getCurrentPanel()).val() == null || $("#server", navTab.getCurrentPanel()).val() == null) {
         alertMsg("请选择监控服务和服务码");
         return;
     }
     var o = new AjaxOptions();
     o.timeout = 30000;
-    o.put("server", $("#server", page).val());
-    o.put("service_code_detail", $("#service_code_detail", page).val());
+    o.put("server", $("#server", navTab.getCurrentPanel()).val());
+    o.put("service_code_detail", $("#service_code_detail", navTab.getCurrentPanel()).val());
     o.put("service_code", "S34204");
     o.sus = function(data) {
         var list = data.list;
@@ -128,9 +128,9 @@ $("#search-button", page).click(function() {
             series[2].data[k + j + i] = parseInt(h_list[i].avg_run_time);
         }
 
-        $('#service_run_time', page).highcharts({
+        $('#service_run_time', navTab.getCurrentPanel()).highcharts({
             chart: {type: 'spline'},
-            title: {text: getParaValue($("#server", page).val() + '.service', $("#service_code_detail", page).val()) + '运行情况(' + year + ')'},
+            title: {text: getParaValue($("#server", navTab.getCurrentPanel()).val() + '.service', $("#service_code_detail", navTab.getCurrentPanel()).val()) + '运行情况(' + year + ')'},
             xAxis: {
                 tickInterval: 8,
                 categories: categories,
