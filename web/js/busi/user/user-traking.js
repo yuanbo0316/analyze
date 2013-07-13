@@ -68,17 +68,17 @@ $("#search-today", navTab.getCurrentPanel()).click(function() {
     o.put("service_code", "S34112");
     o.sus = function(data) {
         var result = data.result;
-        if (result[i].response_code != "" && result[i].service_code == null) {
-            result[i].success = '失败';
-        } else if (result[i].service_code == null && result[i].response_code == "") {
-            result[i].success = '成功';
-        } else {
-        }
         for (var i = 0; i < result.length; i++) {
             if (result[i].service_code != null)
                 result[i].service_code = getParaValue(result[i].server + ".service", result[i].service_code) + "(" + result[i].service_code + ")";
             result[i].server = getParaValue("st.server", result[i].server);
             result[i].from_node = getParaValue("st.node", result[i].from_node);
+            if (result[i].response_code != "" && result[i].service_code == null) {
+                result[i].success = '失败';
+            } else if (result[i].service_code == null && result[i].response_code == "") {
+                result[i].success = '成功';
+            } else {
+            }
         }
         padBackTable(data.result, "#user_trake_list");
     }
