@@ -28,7 +28,7 @@ $("#search-button", navTab.getCurrentPanel()).click(function() {
         var month = "";
         if (list[0]) {
             if ((list[0].save_time).substring(0, 4) == (list[list.length - 1].save_time).substring(0, 4)) {
-                year = $("#sql_name", navTab.getCurrentPanel()) + '运行情况(' + (list[0].save_time).substring(0, 4) + '年)';
+                year = $("#sql_name", navTab.getCurrentPanel()).val() + '运行情况(' + (list[0].save_time).substring(0, 4) + '年)';
             } else {
                 year = $("#sql_name", navTab.getCurrentPanel()).val() + '运行情况(' + (list[0].save_time).substring(0, 4) + '年到' + (list[list.length - 1].save_time).substring(0, 4) + '年)';
             }
