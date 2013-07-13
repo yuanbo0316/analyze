@@ -7,8 +7,8 @@
 
 initParaSelect("st.server", $("#server", navTab.getCurrentPanel()));
 $("#search-button", navTab.getCurrentPanel()).click(function() {
-    if ($("#sql_name", navTab.getCurrentPanel()).val() == null || $("#server", navTab.getCurrentPanel()).val() == null) {
-        alertMsg("请选择监控服务和SQL语句");
+    if ($("#sql_name", navTab.getCurrentPanel()).val() == "" || $("#server", navTab.getCurrentPanel()).val() == "") {
+        alertMsg.confirm("请选择监控服务和SQL语句");
         return;
     }
     var o = new AjaxOptions();

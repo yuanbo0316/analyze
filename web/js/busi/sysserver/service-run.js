@@ -61,8 +61,9 @@ initServiceParaSelect("jtaqxh.service", $("#service_code_detail", navTab.getCurr
 
 $("#service_code_detail", navTab.getCurrentPanel()).combox();
 $("#search-button", navTab.getCurrentPanel()).click(function() {
-    if ($("#service_code_detail", navTab.getCurrentPanel()).val() == null || $("#server", navTab.getCurrentPanel()).val() == null) {
-        alertMsg("请选择监控服务和服务码");
+    console.log($("#service_code_detail", navTab.getCurrentPanel()).val() == "" || $("#server", navTab.getCurrentPanel()).val() == "");
+    if ($("#service_code_detail", navTab.getCurrentPanel()).val() == "" || $("#server", navTab.getCurrentPanel()).val() == "") {
+        alertMsg.confirm("请选择监控服务和服务码");
         return;
     }
     var o = new AjaxOptions();
@@ -82,12 +83,12 @@ $("#search-button", navTab.getCurrentPanel()).click(function() {
         var month = "";
         if (list[0]) {
             if ((list[0].save_time).substring(0, 4) == (list[list.length - 1].save_time).substring(0, 4)) {
-                year =getParaValue($("#server", navTab.getCurrentPanel()).val() + '.service', $("#service_code_detail", navTab.getCurrentPanel()).val()) + '运行情况('+(list[0].save_time).substring(0, 4) + '年)';
+                year = list[0].value_desc + '运行情况(' + (list[0].save_time).substring(0, 4) + '年)';
             } else {
-                year = getParaValue($("#server", navTab.getCurrentPanel()).val() + '.service', $("#service_code_detail", navTab.getCurrentPanel()).val()) + '运行情况('+(list[0].save_time).substring(0, 4) + '年到' + (list[list.length - 1].save_time).substring(0, 4) + '年)';
+                year = list[0].value_desc + '运行情况(' + (list[0].save_time).substring(0, 4) + '年到' + (list[list.length - 1].save_time).substring(0, 4) + '年)';
             }
-        }else{
-            year =getParaValue($("#server", navTab.getCurrentPanel()).val() + '.service', $("#service_code_detail", navTab.getCurrentPanel()).val()) + '服务未运行';
+        } else {
+            year = '服务' + $("#service_code_detail", navTab.getCurrentPanel()).val() + '未运行';
         }
         series[0] = {"name": "最长运行时间", "data": []};
         series[1] = {"name": "最短运行时间", "data": []};
