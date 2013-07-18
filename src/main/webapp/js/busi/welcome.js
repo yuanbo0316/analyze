@@ -1,4 +1,4 @@
-/* 
+/*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -37,9 +37,14 @@ function abde() {
                 sum: 0
             }
         }
+        if (!today[4]) {
+            today[4] = {
+                sum: 0
+            }
+        }
         today_data1[0] = {
             name: "未缴费（笔）",
-            y: parseInt(today[1].sum) - parseInt(today[2].sum),
+            y: parseInt(today[1].sum)+parseInt(today[3].sum) - parseInt(today[2].sum),
             color: 'RGB(139, 188, 33)'
         };
         today_data1[1] = {
@@ -48,7 +53,7 @@ function abde() {
         };
         today_data2[0] = {
             name: "失效（条）",
-            y: parseInt(today[3].sum) - parseInt(today[0].sum),
+            y: parseInt(today[4].sum) - parseInt(today[0].sum),
             color: 'RGB(98,66,137)'
         };
         today_data2[1] = {
@@ -58,7 +63,7 @@ function abde() {
         };
         all_data1[0] = {
             name: "未缴费（笔）",
-            y: parseInt(all[1].sum) - parseInt(all[2].sum),
+            y: parseInt(all[1].sum)+parseInt(all[3].sum) - parseInt(all[2].sum),
             color: 'RGB(139, 188, 33)'
         };
         all_data1[1] = {
@@ -67,7 +72,7 @@ function abde() {
         };
         all_data2[0] = {
             name: "失效（条）",
-            y: parseInt(all[3].sum) - parseInt(all[0].sum),
+            y: parseInt(all[4].sum) - parseInt(all[0].sum),
             color: 'RGB(98,66,137)'
         };
         all_data2[1] = {
@@ -156,7 +161,7 @@ function abde() {
                         }
                     }]
             },
-            series: [{ 
+            series: [{
                     type: 'pie',
                     name: 'Total consumption',
                     data: today_data1,

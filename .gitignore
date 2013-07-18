@@ -219,3 +219,4 @@ pip-log.txt
 !/web/WEB-INF/sql/
 /target/
 target/
+!/src/main/webapp/WEB-INF/sql/
