@@ -220,3 +220,4 @@ pip-log.txt
 /target/
 target/
 !/src/main/webapp/WEB-INF/sql/
+/src/main/webapp/META-INF/

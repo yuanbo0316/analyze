@@ -62,7 +62,7 @@ initServiceParaSelect("jtaqxh.service", $("#service_code_detail", navTab.getCurr
 $("#service_code_detail", navTab.getCurrentPanel()).combox();
 $("#search-button", navTab.getCurrentPanel()).click(function() {
     if ($("#service_code_detail", navTab.getCurrentPanel()).val() == null || $("#server", navTab.getCurrentPanel()).val() == null) {
-        alertMsg("请选择监控服务和服务码");
+        alertMsg.confirm("请选择监控服务和服务码");
         return;
     }
     var o = new AjaxOptions();
@@ -136,7 +136,7 @@ $("#search-button", navTab.getCurrentPanel()).click(function() {
             chart: {type: 'spline'},
             title: {text: year},
             xAxis: {
-                tickInterval: 8,
+                tickInterval: 20,
                 categories: categories,
                 showLastLabel: true,
                 labels: {

@@ -29,3 +29,13 @@ $("#edit", navTab.getCurrentPanel()).click(function() {
     }
 });
 
+$("#edit_ip_detail", navTab.getCurrentPanel()).click(function() {
+      if (!$("#ip_addr_detail", navTab.getCurrentPanel()).val()) {
+        alertMsg.confirm("请输入IP地址");
+        return;
+    }
+        sessionStorage.log_ip_dialog = JSON.stringify({server:$("#server", navTab.getCurrentPanel()).val(),ip:$("#ip_addr_detail", navTab.getCurrentPanel()).val()});
+        $.pdialog.open("page/user/log-ip-dialog.html", 'log-ip-dialog', $("#ip_addr_detail", navTab.getCurrentPanel()).val()+'登录用户详情', {"width": 800, "height": 530});
+   
+});
+

@@ -54,7 +54,7 @@ o.sus = function(data) {
 //        series[9].data[i] = Number(loginTable[i].jk_count);
         series[2].data[i] = Number(loginTable[i].sum_count);
     }
-    $('#log-final-line').highcharts({
+    $('#log-final-line',navTab.getCurrentPanel()).highcharts({
         chart: {
         },
         title: {

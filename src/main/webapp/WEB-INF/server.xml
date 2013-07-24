@@ -8,7 +8,7 @@ and open the template in the editor.
 <root>
     <server>
         <name>jtaqxh</name>
-        <sql_dir>C:\\Users\\chen\\Documents\\GitHub\\analyze\\web\\WEB-INF\\sql</sql_dir>
+        <sql_dir>D:\\project\\web_project\\workspace\\analyze\\web\\WEB-INF\\sql</sql_dir>
         <analyze>sqlRunAnalyze</analyze>
         <analyze>serviceRunAnalyze</analyze>
         <analyze>loginAnalyze</analyze>
@@ -17,10 +17,11 @@ and open the template in the editor.
         <analyze>logStratAnalyze</analyze>
         <analyze>taskAnalyze</analyze>
         <analyze>errorLogAnalyze</analyze>
+        <analyze>picRequestAnalyze</analyze>
     </server>
     <server>
         <name>jtgzfw</name>
-        <sql_dir>C:\\Users\\chen\\Documents\\GitHub\\analyze\\web\\WEB-INF\\sql</sql_dir>
+        <sql_dir>D:\\project\\web_project\\workspace\\analyze\\web\\WEB-INF\\sql</sql_dir>
         <analyze>sqlRunAnalyze</analyze>
         <analyze>serviceRunAnalyze</analyze>
         <analyze>loginAnalyze</analyze>
@@ -29,5 +30,6 @@ and open the template in the editor.
         <analyze>logStratAnalyze</analyze>
         <analyze>taskAnalyze</analyze>
         <analyze>errorLogAnalyze</analyze>
+        <analyze>picRequestAnalyze</analyze>
     </server>
 </root>

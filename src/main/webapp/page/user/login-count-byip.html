@@ -7,8 +7,8 @@ and open the template in the editor.
     <form id="search-form">
         <div class="searchBar">
             <p  style="text-align:center;"><span style=" font-size: 20px;font-weight: bold;">近30天登陆IP情况</span></p>
-             <table class="searchContent" style="margin-top: 10px">
-               
+            <table class="searchContent" style="margin-top: 10px">
+
                 <tr>  
                     <td width="300">
 
@@ -37,8 +37,10 @@ and open the template in the editor.
 
 <div class="pageContent">
     <div class="panelBar">
-        <ul class="toolBar">
-            <li><a class="edit" id="edit" target-table="username_count_list"><span>查看详细</span></a></li>
+        <ul class="toolBar"> 
+            <li><a class="edit" id="edit" target-table="username_count_list"><span>查看详细</span></a></li> 
+            <li style="float:right"><a class="edit" id="edit_ip_detail" target-table="username_count_list"><span>查看IP详细</span></a></li>        
+            <li style="float:right"><input id="ip_addr_detail" type="text" placeholder="请输入IP地址"/></li>
         </ul>
     </div>
     <table class="table" width="100%" layoutH="154" id="username_count_list">

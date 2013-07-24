@@ -82,7 +82,7 @@ $("#search-button", navTab.getCurrentPanel()).click(function() {
             chart: {type: 'spline'},
             title: {text:  year },
             xAxis: {
-                tickInterval: 8,
+                tickInterval: 20,
                 categories: categories,
                 showLastLabel: true,
                 labels: {
