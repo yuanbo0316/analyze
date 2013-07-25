@@ -61,7 +61,7 @@ public class AjaxUtil {
         if (log.isDebugEnabled()) {
             log.debug("ajax返回的数据：" + resData);
         }
-        out.print(DataConvertFactory.praseJson(resData));
+        out.print(DataConvertFactory.praseNormJson(resData));
     }
 
     /**
@@ -90,7 +90,7 @@ public class AjaxUtil {
             LogUtil.analysisCommanDataLog(resData, "log-ajax-res");
         }
         try {
-            out.print(DataConvertFactory.praseJson(resData));
+            out.print(DataConvertFactory.praseNormJson(resData));
         } catch (IOException e) {
             log.error("JSP输出异常：", e);
         }

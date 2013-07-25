@@ -385,7 +385,10 @@ AjaxOptions = function(formId) {
             returnData = eval('(' + data + ')');       //把字符串转为json
         } catch (e) {
             returnData = {
-                'head': {}
+                'head': {
+                    response_code: '-1',
+                    response_desc: '服务端返回的json解析异常'
+                }
             };
         }
         if (returnData.head.response_code != "000000") {
